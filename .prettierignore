@@ -1,0 +1,8 @@
+node_modules
+.next
+public
+build
+dist
+coverage
+/*.log
+*.tgz

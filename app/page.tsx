@@ -1,9 +1,9 @@
-import { Button } from "@/shadcn/components/ui/button";
+import { Button } from '@/shadcn/components/ui/button';
 
 export default function Home() {
      return (
           <div>
-               <Button>Hola Mundo</Button>
+               <Button>Hola mundo</Button>
                <div></div>
           </div>
      );

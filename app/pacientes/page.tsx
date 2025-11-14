@@ -1,3 +1,9 @@
+import PageHeader from '@/components/PageHeader';
+
 export default function page() {
-     return <div>Patient Page</div>;
+     return (
+          <>
+               <PageHeader title="Paciente" description="Información y detalles del paciente" />
+          </>
+     );
 }

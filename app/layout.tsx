@@ -4,13 +4,17 @@ import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+interface RootLayoutProps {
+     children: React.ReactNode;
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
      return (
           <html lang="es">
                <head></head>
                <body className={`${inter.variable} font-display antialiased flex min-h-screen`}>
                     <ConditionalNavbar />
-                    {children}
+                    <main className="p-7 flex flex-col">{children}</main>
                </body>
           </html>
      );

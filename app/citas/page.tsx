@@ -1,5 +1,9 @@
-import React from 'react';
+import PageHeader from '@/components/PageHeader';
 
 export default function page() {
-     return <div>Page Appointment</div>;
+     return (
+          <>
+               <PageHeader title="Citas" description="Gestión y programación de citas" />
+          </>
+     );
 }

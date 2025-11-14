@@ -1,0 +1,12 @@
+{
+     "today": 4,
+     "week": 18,
+     "month": 52,
+     "patientsThisMonth": 27,
+     "comparison": {
+          "dayDiff": 2,
+          "weekDiff": -4,
+          "monthDiff": 11,
+          "patientsMonthDiff": 3
+     }
+}

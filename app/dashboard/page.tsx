@@ -1,12 +1,19 @@
+import { CardsGroup } from '@/components/index';
 import NotificationComponent from '@/components/layout/Notification';
 import PageHeader from '@/components/layout/PageHeader';
 
 export default function Page() {
      return (
           <>
-               <div className="flex justify-between min-w-full items-center">
-                    <PageHeader title="Dashboard" description="Resumen y estadísticas de la actividad" />
-                    <NotificationComponent />
+               <div className="flex flex-col min-w-full">
+                    <div className="flex min-w-full justify-between items-center">
+                         <PageHeader title="Dashboard" description="Resumen y estadísticas de la actividad" />
+                         <NotificationComponent />
+                    </div>
+                    {/* cards resume */}
+
+                    <CardsGroup />
+                    {/* graphs */}
                </div>
           </>
      );

@@ -9,3 +9,4 @@ export { default as Navbar } from './ui/Navbar';
 export { default as ConditionalNavbar } from './layout/ConditionalNavbar';
 export { default as Notification } from './layout/Notification';
 export { default as PageHeader } from './layout/PageHeader';
+export { default as CardsGroup } from './layout/CardsGroup';

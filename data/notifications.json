@@ -1,0 +1,37 @@
+[
+     {
+          "id": 1,
+          "title": "New Patient Assigned",
+          "description": "John Doe has been added to your patient list.",
+          "time": "5 minutes ago",
+          "unread": true
+     },
+     {
+          "id": 2,
+          "title": "Appointment Canceled",
+          "description": "Olivia Chen canceled her appointment for tomorrow at 10:30 AM.",
+          "time": "1 hour ago",
+          "unread": true
+     },
+     {
+          "id": 3,
+          "title": "Unread Message",
+          "description": "You have a new message from Liam Gallagher.",
+          "time": "3 hours ago",
+          "unread": true
+     },
+     {
+          "id": 4,
+          "title": "Billing Reminder",
+          "description": "Invoice #1234 for Benjamin Carter is due tomorrow.",
+          "time": "1 day ago",
+          "unread": false
+     },
+     {
+          "id": 5,
+          "title": "Note Pending",
+          "description": "Session note for Sofia Rodriguez is overdue.",
+          "time": "2 days ago",
+          "unread": false
+     }
+]

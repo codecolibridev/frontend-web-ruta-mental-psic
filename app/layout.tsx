@@ -1,4 +1,4 @@
-import ConditionalNavbar from '@/components/ConditionalNavbar';
+import ConditionalNavbar from '@/components/layout/ConditionalNavbar';
 import './globals.css';
 import { Inter } from 'next/font/google';
 

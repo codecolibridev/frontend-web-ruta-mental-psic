@@ -2,8 +2,8 @@
 
 import { Bell, CheckCircle } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import notificationsData from '../data/notifications.json';
-import type { Notification } from '../types/notification';
+import notificationsData from '../../data/notifications.json';
+import type { Notification } from '../../types/notification';
 
 export default function NotificationComponent() {
      const [isOpen, setIsOpen] = useState(false);

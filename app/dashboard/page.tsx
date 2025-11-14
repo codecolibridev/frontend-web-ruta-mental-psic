@@ -1,5 +1,5 @@
-import NotificationComponent from '@/components/Notification';
-import PageHeader from '@/components/PageHeader';
+import NotificationComponent from '@/components/layout/Notification';
+import PageHeader from '@/components/layout/PageHeader';
 
 export default function Page() {
      return (

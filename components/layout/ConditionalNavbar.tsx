@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Navbar from './Navbar';
+import Navbar from '../ui/Navbar';
 
 const EXCLUDED_PATHS = ['/login', '/recuperar-password'];
 

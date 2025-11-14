@@ -5,11 +5,19 @@
      --color-primary: #137fec;
 
      /* Agregados desde el script */
-     --color-primary: #607afb;
-     --color-background-light: #f5f6f8;
+     --color-background-light: #f7fafc;
      --color-background-dark: #101922;
 
+     --color-background-secondary-dark: #2d3748;
+     --color-background-secondary-light: #dfe4fe;
+
      --font-family-display: 'Inter', sans-serif;
+
+     /* color text */
+     --color-text-light: #1a202c;
+     --color-text-dark: white;
+     --color-text-secondary-light: #4a5568;
+     --color-text-secondary-dark: #4a5568;
 }
 
 :root {

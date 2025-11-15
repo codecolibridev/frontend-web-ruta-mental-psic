@@ -23,7 +23,7 @@ export default function CardsGroup() {
      };
 
      return (
-          <section className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <section className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
                <div className="flex flex-col gap-1 rounded-xl p-4 bg-[#2D3748] border border-[#4A5568]/50 hover:border-[#4A5568] transition-all duration-200">
                     <p className="text-[#A0AEC0] text-xs font-medium">Citas de hoy</p>
                     <p className="text-[#E2E8F0] tracking-tight text-3xl font-bold">{today}</p>

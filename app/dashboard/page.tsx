@@ -1,4 +1,4 @@
-import { CardsGroup, UpcomingAppointments } from '@/components/index';
+import { CardsGroup, UpcomingAppointments, WeeklyActivityChart } from '@/components/index';
 import NotificationComponent from '@/components/layout/Notification';
 import PageHeader from '@/components/layout/PageHeader';
 
@@ -14,8 +14,8 @@ export default function Page() {
                     <CardsGroup />
                     {/* graphs */}
 
-                    <div className="flex mt-10">
-                         {/* Graph */}
+                    <div className="flex flex-col md:flex-row mt-10 gap-4">
+                         <WeeklyActivityChart />
                          <UpcomingAppointments />
                     </div>
                </div>

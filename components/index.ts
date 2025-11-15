@@ -3,6 +3,7 @@ export type { ButtonProps } from './ui/Button';
 
 export { default as Input } from './ui/Input';
 export type { InputProps } from './ui/Input';
+export { default as UpcomingAppointments } from './ui/UpcomingAppointments';
 
 export { default as Navbar } from './ui/Navbar';
 

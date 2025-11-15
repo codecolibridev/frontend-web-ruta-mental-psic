@@ -1,4 +1,4 @@
-import { CardsGroup } from '@/components/index';
+import { CardsGroup, UpcomingAppointments } from '@/components/index';
 import NotificationComponent from '@/components/layout/Notification';
 import PageHeader from '@/components/layout/PageHeader';
 
@@ -10,10 +10,14 @@ export default function Page() {
                          <PageHeader title="Dashboard" description="Resumen y estadísticas de la actividad" />
                          <NotificationComponent />
                     </div>
-                    {/* cards resume */}
 
                     <CardsGroup />
                     {/* graphs */}
+
+                    <div className="flex mt-10">
+                         {/* Graph */}
+                         <UpcomingAppointments />
+                    </div>
                </div>
           </>
      );

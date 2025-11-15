@@ -71,7 +71,7 @@ export default function Navbar() {
                <div className="flex h-full flex-col justify-between p-4">
                     <div className="flex flex-col gap-6">
                          <div className="flex items-center gap-3 px-2">
-                              <div className="bg-primary/20 p-2 -ml-1 rounded-lg flex items-center justify-center">
+                              <div className="bg-primary/10 p-2 -ml-1 rounded-lg flex items-center justify-center">
                                    {collapsed ? (
                                         <button
                                              type="button"
@@ -113,7 +113,7 @@ export default function Navbar() {
                               {/* moving indicator */}
                               <div
                                    aria-hidden
-                                   className="absolute left-0 right-0 rounded-lg bg-primary/20 dark:bg-primary/20 pointer-events-none transition-all duration-300"
+                                   className="absolute left-0 right-0 rounded-lg bg-primary/10 dark:bg-primary/10 pointer-events-none transition-all duration-300"
                                    style={{
                                         top: indicator.top,
                                         height: indicator.height,

@@ -4,73 +4,73 @@
                "id": 1,
                "time": "09:00 AM",
                "name": "Liam Gallagher",
-               "type": "Initial Consultation"
+               "type": "Consulta inicial"
           },
           {
                "id": 2,
                "time": "10:30 AM",
                "name": "Olivia Chen",
-               "type": "Follow-up"
+               "type": "Seguimiento"
           },
           {
                "id": 3,
                "time": "12:00 PM",
                "name": "Benjamin Carter",
-               "type": "Follow-up"
+               "type": "Seguimiento"
           },
           {
                "id": 4,
                "time": "02:00 PM",
                "name": "Sofia Rodriguez",
-               "type": "Couples Therapy"
+               "type": "Terapia de pareja"
           },
           {
                "id": 5,
                "time": "02:30 PM",
                "name": "Mateo López",
-               "type": "Psychotherapy"
+               "type": "Psicoterapia"
           },
           {
                "id": 6,
                "time": "03:00 PM",
                "name": "Emma García",
-               "type": "Follow-up"
+               "type": "Seguimiento"
           },
           {
                "id": 7,
                "time": "03:30 PM",
                "name": "Noah Smith",
-               "type": "Initial Consultation"
+               "type": "Consulta inicial"
           },
           {
                "id": 8,
                "time": "04:00 PM",
                "name": "Ava Johnson",
-               "type": "Couples Therapy"
+               "type": "Terapia de pareja"
           },
           {
                "id": 9,
                "time": "04:30 PM",
                "name": "Lucas Martínez",
-               "type": "Follow-up"
+               "type": "Seguimiento"
           },
           {
                "id": 10,
                "time": "05:00 PM",
                "name": "Isabella Fernández",
-               "type": "Initial Consultation"
+               "type": "Consulta inicial"
           },
           {
                "id": 11,
                "time": "05:30 PM",
                "name": "Mason Brown",
-               "type": "Follow-up"
+               "type": "Seguimiento"
           },
           {
                "id": 12,
                "time": "06:00 PM",
                "name": "Mia Martínez",
-               "type": "Psychotherapy"
+               "type": "Psicoterapia"
           }
      ]
 }

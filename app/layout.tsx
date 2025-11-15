@@ -14,7 +14,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
                <head></head>
                <body className={`${inter.variable} font-display antialiased flex min-h-screen`}>
                     <ConditionalNavbar />
-                    <main className="p-7 flex flex-col flex-1 bg-background-light dark:bg-background-dark">
+                    <main
+                         className="p-7 flex flex-col flex-1 bg-background-light dark:bg-background-dark transition-all duration-200"
+                         style={{ paddingLeft: 'calc(var(--sidebar-width, 0) + 2rem)' }}
+                    >
                          {children}
                     </main>
                </body>

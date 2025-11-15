@@ -15,6 +15,18 @@ export default function Navbar() {
      const pathname = usePathname();
      const [collapsed, setCollapsed] = useState(false);
 
+     useEffect(() => {
+          const width = collapsed ? '5rem' : '16rem';
+          try {
+               document.documentElement.style.setProperty('--sidebar-width', width);
+          } catch {}
+          return () => {
+               try {
+                    document.documentElement.style.removeProperty('--sidebar-width');
+               } catch {}
+          };
+     }, [collapsed]);
+
      const navItems: NavItem[] = useMemo(
           () => [
                { href: '/dashboard', label: 'Dashboard', icon: <LayoutDashboard className="h-5 w-5" /> },
@@ -51,16 +63,14 @@ export default function Navbar() {
 
      return (
           <aside
+               aria-label="Sidebar navigation"
                className={` ${
                     collapsed ? 'w-20' : 'w-64'
-               } shrink-0 bg-white dark:bg-background-dark border-r border-slate-200 dark:border-slate-700/50 transition-all duration-200 ease-in-out overflow-hidden`}
+               } fixed left-0 top-0 bottom-0 z-40 shrink-0 bg-white dark:bg-background-dark border-r border-slate-200 dark:border-slate-700/50 transition-all duration-200 ease-in-out overflow-hidden`}
           >
                <div className="flex h-full flex-col justify-between p-4">
-                    {/* Top Section */}
                     <div className="flex flex-col gap-6">
-                         {/* Logo */}
                          <div className="flex items-center gap-3 px-2">
-                              {/* Left logo area: when collapsed this becomes the expand button */}
                               <div className="bg-primary/20 p-2 -ml-1 rounded-lg flex items-center justify-center">
                                    {collapsed ? (
                                         <button
@@ -155,7 +165,6 @@ export default function Navbar() {
                                    <p className="text-slate-600 dark:text-slate-400 text-xs">Psicólogo</p>
                               </div>
 
-                              {/* When collapsed, hide logout button. When expanded, show it at the end. */}
                               {!collapsed && (
                                    <LogOut className="h-5 w-5 text-slate-600 dark:text-slate-400 cursor-pointer hover:text-slate-800 dark:hover:text-white transition-colors" />
                               )}

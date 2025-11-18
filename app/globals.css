@@ -18,6 +18,11 @@
      --color-text-dark: white;
      --color-text-secondary-light: #4a5568;
      --color-text-secondary-dark: #4a5568;
+
+     /* Buttons */
+     --color-destructive: #e53e3e; /* red */
+     --color-destructive-hover: #c53030; /* darker on hover */
+     --color-destructive-outline: #fc8181; /* for text/border in outline */
 }
 
 :root {

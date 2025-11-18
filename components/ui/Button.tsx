@@ -1,61 +1,72 @@
 'use client';
 
-import React, { ButtonHTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes, ReactNode } from 'react';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-     variant?: 'primary' | 'secondary' | 'ghost';
-     className?: string;
+     variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'destructive-outline';
+     size?: 'sm' | 'md' | 'lg';
+     leftIcon?: ReactNode;
+     rightIcon?: ReactNode;
      loading?: boolean;
+     children: ReactNode;
+     className?: string;
 }
 
 export default function Button({
      children,
-     type = 'button',
-     disabled,
-     className = '',
      variant = 'primary',
+     size = 'md',
+     leftIcon,
+     rightIcon,
      loading = false,
+     disabled = false,
+     className = '',
      ...rest
 }: ButtonProps) {
-     const isDisabled = !!disabled || loading;
-     const base =
-          'flex h-12 w-full items-center justify-center rounded-lg px-6 text-base font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2';
+     const base = `
+    hover:cursor-pointer flex items-center justify-center gap-2 rounded-lg font-bold tracking-[0.015em]
+    transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary/50
+    disabled:cursor-not-allowed disabled:opacity-50
+    min-w-[84px] max-w-[480px] overflow-hidden
+  `;
 
-     const variants: Record<string, string> = {
-          primary: `bg-primary text-white hover:bg-primary/90 disabled:opacity-60`,
-          secondary: `bg-slate-100 text-slate-900 hover:bg-slate-200 disabled:opacity-60`,
-          ghost: `bg-transparent text-primary hover:underline disabled:opacity-60`,
+     const sizes = {
+          sm: 'h-9 px-3 text-sm',
+          md: 'h-10 px-4 text-sm',
+          lg: 'h-12 px-6 text-base',
      };
 
-     // spinner color depends on variant to keep contrast in light/dark
-     const spinnerColor =
-          variant === 'primary'
-               ? 'text-white'
-               : variant === 'secondary'
-               ? 'text-slate-900 dark:text-white'
-               : 'text-primary';
+     const variants = {
+          primary: 'bg-primary hover:bg-primary/90 text-white',
+          secondary: 'bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm',
+          outline: 'bg-transparent border border-white/20 text-white hover:bg-white/10',
+          ghost: 'bg-transparent text-white hover:bg-white/10',
+          destructive: 'bg-[var(--color-destructive)] hover:bg-[var(--color-destructive-hover)] text-white',
+          'destructive-outline':
+               'bg-transparent border border-[var(--color-destructive-outline)] text-[var(--color-destructive-outline)] hover:bg-[var(--color-destructive)]/10',
+     };
 
      return (
           <button
-               type={type}
-               disabled={isDisabled}
-               aria-busy={loading || undefined}
-               className={`${base} ${variants[variant]} ${className} ${isDisabled ? 'cursor-not-allowed' : ''}`}
+               className={`
+        ${base}
+        ${sizes[size]}
+        ${variants[variant]}
+        ${className}
+      `}
+               disabled={disabled || loading}
                {...rest}
           >
-               {loading ? (
-                    <svg
-                         className={`animate-spin h-4 w-4 mr-2 ${spinnerColor}`}
-                         viewBox="0 0 24 24"
-                         fill="none"
-                         xmlns="http://www.w3.org/2000/svg"
-                         aria-hidden="true"
-                    >
+               {loading && (
+                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
                     </svg>
-               ) : null}
-               {children}
+               )}
+
+               {!loading && leftIcon && <span className="flex-shrink-0">{leftIcon}</span>}
+               <span className="truncate">{children}</span>
+               {!loading && rightIcon && <span className="flex-shrink-0">{rightIcon}</span>}
           </button>
      );
 }

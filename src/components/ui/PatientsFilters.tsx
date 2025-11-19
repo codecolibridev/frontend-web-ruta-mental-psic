@@ -1,20 +1,36 @@
-import { ChevronDown, Search } from 'lucide-react';
+import { ChevronDown, Search, RefreshCw } from 'lucide-react';
 
-export default function PatientsFilters() {
+type PatientsFiltersProps = {
+     onReload?: () => void;
+};
+
+export default function PatientsFilters({ onReload }: PatientsFiltersProps) {
      return (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap items-center gap-4">
                {/* Buscador */}
                <div className="lg:grow">
                     <label className="flex flex-col min-w-40 h-12 w-full">
-                         <div className="flex w-full flex-1 items-stretch rounded-lg h-full">
-                              <div className="flex border-none bg-[#233648] items-center justify-center px-4 rounded-l-lg">
-                                   <Search className="w-6 h-6 text-[#92adc9]" />
+                         <div className="flex w-full items-stretch h-full gap-3">
+                              <button
+                                   type="button"
+                                   aria-label="Reload data"
+                                   onClick={() => onReload?.()}
+                                   className="flex h-full items-center justify-center bg-[#233648] px-3 rounded-lg hover:bg-[#2d445c] transition-colors"
+                              >
+                                   <RefreshCw className="w-5 h-5 text-[#92adc9]" />
+                              </button>
+
+                              <div className="flex w-full flex-1 items-stretch rounded-lg h-full overflow-hidden bg-[#233648]">
+                                   <div className="flex items-center justify-center px-4">
+                                        <Search className="w-6 h-6 text-[#92adc9]" />
+                                   </div>
+
+                                   <input
+                                        type="text"
+                                        placeholder="Search by name or patient ID..."
+                                        className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-white focus:outline-0 focus:ring-2 focus:ring-cyan-500/50 border-none bg-transparent h-full placeholder:text-[#92adc9] px-4 pl-2 text-base font-normal leading-normal"
+                                   />
                               </div>
-                              <input
-                                   type="text"
-                                   placeholder="Search by name or patient ID..."
-                                   className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-cyan-500/50 border-none bg-[#233648] h-full placeholder:text-[#92adc9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
-                              />
                          </div>
                     </label>
                </div>

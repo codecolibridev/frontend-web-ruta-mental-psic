@@ -14,13 +14,16 @@
           "test:coverage": "jest --coverage"
      },
      "dependencies": {
+          "@hookform/resolvers": "^5.2.2",
           "@radix-ui/react-slot": "^1.2.4",
           "axios": "^1.13.2",
           "lucide-react": "^0.553.0",
           "next": "16.0.2",
           "react": "19.2.0",
           "react-dom": "19.2.0",
-          "recharts": "^3.4.1"
+          "react-hook-form": "^7.66.1",
+          "recharts": "^3.4.1",
+          "zod": "^4.1.12"
      },
      "devDependencies": {
           "@tailwindcss/postcss": "^4",

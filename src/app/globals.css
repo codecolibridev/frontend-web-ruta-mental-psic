@@ -41,3 +41,63 @@ body {
 .material-symbols-outlined {
      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
+
+/* Hide scrollbar but allow scrolling (cross-browser) */
+.hide-scrollbar {
+     -ms-overflow-style: none; /* IE and Edge */
+     scrollbar-width: none; /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+     display: none; /* Chrome, Safari and Opera */
+}
+
+/* Modal / overlay animations */
+@keyframes overlay-in {
+     from {
+          opacity: 0;
+     }
+     to {
+          opacity: 1;
+     }
+}
+@keyframes overlay-out {
+     from {
+          opacity: 1;
+     }
+     to {
+          opacity: 0;
+     }
+}
+@keyframes modal-in {
+     from {
+          opacity: 0;
+          transform: translateY(8px) scale(0.985);
+     }
+     to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+     }
+}
+@keyframes modal-out {
+     from {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+     }
+     to {
+          opacity: 0;
+          transform: translateY(6px) scale(0.985);
+     }
+}
+
+.overlay-enter {
+     animation: overlay-in 260ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+.overlay-exit {
+     animation: overlay-out 220ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+.modal-enter {
+     animation: modal-in 260ms cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+.modal-exit {
+     animation: modal-out 220ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}

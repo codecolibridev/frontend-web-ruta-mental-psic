@@ -2,6 +2,7 @@ import { apiClient } from '@/lib/apiClient';
 import { CreatePatientInterface } from '@/schema/patientSchema';
 import { Patient } from '@/types/patients';
 import { PaginatedResponse, UseParamsOptions } from '@/types/responseTypes';
+import { translateBackendError } from './errors/errorTranslator';
 
 // fetch a paginated list of patients from the API
 export async function getPatients(params: UseParamsOptions): Promise<PaginatedResponse<Patient>> {
@@ -15,6 +16,11 @@ export async function getPatients(params: UseParamsOptions): Promise<PaginatedRe
 
 // create a new patient record
 export async function createPatient(patientData: Omit<CreatePatientInterface, 'id'>): Promise<Patient> {
-     const response = await apiClient.post<Patient>('/patient', patientData);
-     return response.data;
+     try {
+          const response = await apiClient.post<Patient>('/patient', patientData);
+          return response.data;
+     } catch (error: unknown) {
+          const friendlyMessage = translateBackendError(error);
+          throw new Error(friendlyMessage);
+     }
 }

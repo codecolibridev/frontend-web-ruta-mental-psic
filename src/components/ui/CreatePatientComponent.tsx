@@ -26,17 +26,14 @@ export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: bo
      });
 
      const onSubmit = async (data: CreatePatientInterface) => {
-          try {
-               toast.promise(mutate(data), {
-                    loading: 'Creando paciente...',
-                    success: 'Paciente creado con éxito',
-                    error: `Error al crear el paciente`,
-               });
-          } catch (error) {
-               // onClose();
-               console.error('Error submitting form:', error);
-          }
-          reset();
+          toast.promise(mutate(data), {
+               loading: 'Creando paciente...',
+               success: () => {
+                    reset();
+                    return 'Paciente creado con éxito';
+               },
+               error: `Error al crear el paciente`,
+          });
      };
 
      // Modal visibility and animation states

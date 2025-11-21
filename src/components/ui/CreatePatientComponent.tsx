@@ -2,6 +2,7 @@
 
 import Input from '@/components/ui/Input';
 import TextArea from '@/components/ui/TextArea';
+import { SelectSearchableField } from '@/components/ui/SelectSearchableField';
 import { CreatePatientInterface, createPatientSchema } from '@/schema/patientSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { X } from 'lucide-react';
@@ -9,21 +10,36 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from './Button';
 import useCreatePatient from '@/hooks/patients/useCreatePatient';
+import usePsychologistic from '@/hooks/psychologistic/usePsychologistic';
 import { toast } from 'sonner';
 
 export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
      const { mutate, isLoading } = useCreatePatient();
+     const [psychologistSearch, setPsychologistSearch] = useState('');
+
+     // Buscar psicólogos dinámicamente según lo que el usuario escriba
+     const { data: psychologists, isLoading: psychologistsLoading } = usePsychologistic({
+          limit: 50,
+          search: psychologistSearch,
+     });
 
      // React Hook Form setup
      const {
           register,
           handleSubmit,
           reset,
+          control,
           formState: { errors },
      } = useForm<CreatePatientInterface>({
           resolver: zodResolver(createPatientSchema),
           mode: 'onBlur',
      });
+
+     // Mapear psicólogos a opciones para el SelectSearchable
+     const psychologistOptions = psychologists.map((psychologist) => ({
+          value: psychologist.id,
+          label: `${psychologist.first_name} ${psychologist.last_name}`,
+     }));
 
      const onSubmit = async (data: CreatePatientInterface) => {
           toast.promise(mutate(data), {
@@ -133,14 +149,27 @@ export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: bo
                                    />
                               </div>
 
-                              <Input
-                                   label="Email"
-                                   id="email"
-                                   placeholder="juan.perez@example.com"
-                                   type="email"
-                                   {...register('email')}
-                                   error={errors.email?.message}
-                              />
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                   <Input
+                                        label="Email"
+                                        id="email"
+                                        placeholder="juan.perez@example.com"
+                                        type="email"
+                                        {...register('email')}
+                                        error={errors.email?.message}
+                                   />
+
+                                   <SelectSearchableField
+                                        name="psychologist_id"
+                                        control={control}
+                                        label="Psicólogo Asignado"
+                                        options={psychologistOptions}
+                                        placeholder="Seleccionar psicólogo"
+                                        onSearchChange={setPsychologistSearch}
+                                        error={errors.psychologist_id?.message}
+                                        isLoading={psychologistsLoading}
+                                   />
+                              </div>
 
                               <TextArea
                                    label="Notas"

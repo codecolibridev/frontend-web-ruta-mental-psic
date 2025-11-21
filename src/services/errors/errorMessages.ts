@@ -7,19 +7,19 @@ export const VALIDATION_ERRORS: Record<string, string> = {
      'email should not be empty': 'El correo es obligatorio',
      'id_number should not be empty': 'La cédula es obligatoria',
      'birth_date should not be empty': 'La fecha de nacimiento es obligatoria',
-     'gender should not be empty': 'El género es obligatorio',
-     'phone should not be empty': 'El teléfono es obligatorio',
+     'notes should not be empty': 'Las notas son obligatorias',
+     'diagnosis should not be empty': 'El diagnóstico es obligatorio',
 
      // incorrect types
      'first_name must be a string': 'El nombre debe ser texto',
      'last_name must be a string': 'El apellido debe ser texto',
      'email must be an email': 'El correo electrónico no es válido',
      'id_number must be a string': 'La cédula debe ser texto',
+     'notes must be a string': 'Las notas deben ser texto',
+     'diagnosis must be a string': 'El diagnóstico debe ser texto',
 
      // format validations
      'birth_date must be a valid ISO 8601 date string': 'La fecha de nacimiento no es válida',
-     'phone must be a valid phone number': 'El número de teléfono no es válido',
-     'gender must be one of the following values: male, female, other': 'El género debe ser masculino, femenino u otro',
 
      // uniqueness
      'email must be unique': 'Este correo ya está registrado',

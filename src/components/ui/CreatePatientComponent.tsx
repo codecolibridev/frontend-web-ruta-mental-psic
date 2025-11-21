@@ -12,7 +12,7 @@ import useCreatePatient from '@/hooks/patients/useCreatePatient';
 import { toast } from 'sonner';
 
 export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-     const { mutate, isLoading, error } = useCreatePatient();
+     const { mutate, isLoading } = useCreatePatient();
 
      // React Hook Form setup
      const {
@@ -32,7 +32,7 @@ export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: bo
                     reset();
                     return 'Paciente creado con éxito';
                },
-               error: `Error al crear el paciente`,
+               error: (error) => error.message,
           });
      };
 
@@ -97,12 +97,6 @@ export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: bo
 
                          {/* body */}
                          <div className="p-6 space-y-6">
-                              {error && (
-                                   <p className="bg-red-200 p-2 rounded-2xl text-red-500 text-center font-semibold">
-                                        Error: {error}
-                                   </p>
-                              )}
-
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                    <Input
                                         label="Nombre"

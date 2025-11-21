@@ -10,4 +10,5 @@ export interface PaginatedResponse<T> {
 export interface UseParamsOptions {
      page?: number;
      limit?: number;
+     search?: string;
 }

@@ -8,6 +8,7 @@ export const createPatientSchema = z.object({
      email: z.email('El email no es válido').optional(),
      notes: z.string().optional(),
      diagnosis: z.string().optional(),
+     psychologist_id: z.number().optional(),
 });
 
 export type CreatePatientInterface = z.infer<typeof createPatientSchema>;

@@ -36,7 +36,7 @@ const TextArea = forwardRef(function TextArea(
                     ref={ref}
                     placeholder={placeholder}
                     rows={rows}
-                    className={`w-full rounded-lg border ${
+                    className={`w-full rounded-lg border hide-scrollbar ${
                          error ? 'border-red-500' : 'border-slate-300 dark:border-slate-700'
                     } bg-white dark:bg-slate-800 p-3 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none ${
                          textareaClassName ?? ''

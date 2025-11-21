@@ -3,7 +3,7 @@
 import { MoreHorizontal } from 'lucide-react';
 import Pagination from './Pagination';
 import PatientsFilters from './PatientsFilters';
-import usePatients from '@/hooks/usePatients';
+import usePatients from '@/hooks/patients/usePatients';
 import { useState } from 'react';
 
 export default function PatientsTable() {

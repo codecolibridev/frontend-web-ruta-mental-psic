@@ -1,6 +1,7 @@
 'use client';
 
 import Input from '@/components/ui/Input';
+import TextArea from '@/components/ui/TextArea';
 import { CreatePatientInterface, createPatientSchema } from '@/schema/patientSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { X } from 'lucide-react';
@@ -129,33 +130,23 @@ export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: bo
                                    error={errors.email?.message}
                               />
 
-                              <div className="flex flex-col gap-2">
-                                   <label htmlFor="notes" className="text-sm font-medium text-text-secondary-dark">
-                                        Notas
-                                   </label>
-                                   <textarea
-                                        id="notes"
-                                        rows={4}
-                                        placeholder="Información adicional, alergias, condiciones previas..."
-                                        className="w-full rounded-lg border border-[#233648] bg-surface-dark px-4 py-3 text-text-primary-dark placeholder-text-secondary-dark/60 focus:border-primary focus:ring-primary focus:outline-none resize-none"
-                                        {...register('notes')}
-                                   />
-                                   {errors.notes && <p className="text-red-500">{errors.notes.message}</p>}
-                              </div>
+                              <TextArea
+                                   label="Notas"
+                                   id="notes"
+                                   rows={4}
+                                   placeholder="Información adicional, alergias, condiciones previas..."
+                                   {...register('notes')}
+                                   error={errors.notes?.message}
+                              />
 
-                              <div className="flex flex-col gap-2">
-                                   <label htmlFor="diagnosis" className="text-sm font-medium text-text-secondary-dark">
-                                        Diagnóstico
-                                   </label>
-                                   <textarea
-                                        id="diagnosis"
-                                        rows={5}
-                                        placeholder="Diagnóstico principal, observaciones clínicas..."
-                                        className="w-full rounded-lg border border-[#233648] bg-surface-dark px-4 py-3 text-text-primary-dark placeholder-text-secondary-dark/60 focus:border-primary focus:ring-primary focus:outline-none resize-none"
-                                        {...register('diagnosis')}
-                                   />
-                                   {errors.diagnosis && <p className="text-red-500">{errors.diagnosis.message}</p>}
-                              </div>
+                              <TextArea
+                                   label="Diagnóstico"
+                                   id="diagnosis"
+                                   rows={5}
+                                   placeholder="Diagnóstico principal, observaciones clínicas..."
+                                   {...register('diagnosis')}
+                                   error={errors.diagnosis?.message}
+                              />
                          </div>
 
                          {/* Footer */}

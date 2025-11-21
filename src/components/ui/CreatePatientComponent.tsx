@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from './Button';
 import useCreatePatient from '@/hooks/patients/useCreatePatient';
+import { toast } from 'sonner';
 
 export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
      const { mutate, isLoading, error } = useCreatePatient();
@@ -25,13 +26,14 @@ export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: bo
      });
 
      const onSubmit = async (data: CreatePatientInterface) => {
-          try {
-               await mutate(data);
-               reset();
-               // onClose();
-          } catch (error) {
-               console.error('Error submitting form:', error);
-          }
+          toast.promise(mutate(data), {
+               loading: 'Creando paciente...',
+               success: () => {
+                    reset();
+                    return 'Paciente creado con éxito';
+               },
+               error: `Error al crear el paciente`,
+          });
      };
 
      // Modal visibility and animation states

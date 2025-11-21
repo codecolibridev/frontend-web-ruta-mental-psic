@@ -17,7 +17,7 @@ export function translateBackendError(error: unknown): string {
      const axiosError = error as AxiosError<NestErrorResponse>;
 
      // without response (network error, server down, etc.)
-     if (!axiosError.response) {
+     if (!axiosError.response || !axiosError.response.data) {
           return 'No se pudo conectar con el servidor.';
      }
 

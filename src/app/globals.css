@@ -24,10 +24,28 @@
      --color-destructive-hover: #c53030; /* darker on hover */
      --color-destructive-outline: #fc8181; /* for text/border in outline */
 
+     /* TOAST */
      /* Variables para Sonner Toaster (colores por defecto) */
      --toast-bg: #1e293b;
      --toast-text: #ffffff;
      --toast-border: rgba(255, 255, 255, 0.06);
+
+     /* SELECTS */
+     /* Select base */
+     --select-bg: #0f172a; /* slate-900/950 */
+     --select-border: #334155; /* slate-700 */
+     --select-text: #e2e8f0; /* slate-200 */
+     --select-placeholder: #64748b; /* slate-500 */
+     --select-hover: rgba(148, 163, 184, 0.1); /* slate-500/10 */
+     /* Dropdown / Popover */
+     --select-dropdown-bg: #192633;
+     --select-dropdown-border: #334155;
+     --select-dropdown-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+     /* Item seleccionado */
+     --select-item-selected-bg: rgba(19, 127, 236, 0.2); /* primary/20 */
+     --select-item-selected-text: #60a5fa; /* primary light */
+     /* Focus ring */
+     --select-focus-ring: #137fec;
 }
 
 :root {

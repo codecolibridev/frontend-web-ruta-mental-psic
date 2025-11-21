@@ -3,23 +3,30 @@
 import { useState } from 'react';
 import { Mail, Lock, Brain } from 'lucide-react';
 import { Input, Button } from '../../components/index';
+import { loginSchema, LoginInterface } from '@/schema/loginSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 
 export default function LoginPage() {
-     const [email, setEmail] = useState('');
-     const [password, setPassword] = useState('');
+     const {
+          register,
+          handleSubmit,
+          formState: { errors },
+     } = useForm<LoginInterface>({
+          resolver: zodResolver(loginSchema),
+          mode: 'onBlur',
+     });
+
      const [rememberMe, setRememberMe] = useState(false);
      const [isLoading, setIsLoading] = useState(false);
 
-     const handleSubmit = (e: React.FormEvent) => {
-          e.preventDefault();
-          // Set loading state while handling submit
+     const onSubmit = (data: LoginInterface) => {
           setIsLoading(true);
-
-          // Simulate async login, replace with actual auth call
+          console.log('Login data:', data, 'Remember me:', rememberMe);
+          // Simulate async login
           setTimeout(() => {
-               console.log({ email, password, rememberMe });
                setIsLoading(false);
-          }, 1000);
+          }, 2000);
      };
 
      return (
@@ -44,15 +51,14 @@ export default function LoginPage() {
                     </div>
 
                     {/* Form */}
-                    <form onSubmit={handleSubmit} className="mt-8 w-full space-y-4">
+                    <form onSubmit={handleSubmit(onSubmit)} className="mt-8 w-full space-y-4">
                          {/* Email */}
                          <Input
                               label="Dirección de correo electrónico"
                               type="email"
                               placeholder="you@example.com"
-                              value={email}
-                              onChange={(e) => setEmail(e.target.value)}
-                              required
+                              {...register('email')}
+                              error={errors.email?.message}
                               icon={<Mail className="h-5 w-5" />}
                          />
 
@@ -61,9 +67,8 @@ export default function LoginPage() {
                               label="Contraseña"
                               type="password"
                               placeholder="Ingresa tu contraseña"
-                              value={password}
-                              onChange={(e) => setPassword(e.target.value)}
-                              required
+                              {...register('password')}
+                              error={errors.password?.message}
                               icon={<Lock className="h-5 w-5" />}
                          />
 
@@ -90,7 +95,7 @@ export default function LoginPage() {
 
                          {/* Submit */}
                          <div className="mt-6 w-full">
-                              <Button type="submit" loading={isLoading}>
+                              <Button type="submit" loading={isLoading} className="w-full">
                                    Iniciar Sesión
                               </Button>
                          </div>

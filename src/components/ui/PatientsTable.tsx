@@ -1,22 +1,25 @@
+'use client';
+
 import { MoreHorizontal } from 'lucide-react';
 import Pagination from './Pagination';
 import PatientsFilters from './PatientsFilters';
-import patientsJson from '@/data/patients.json';
-import { RawPatient, UiPatient } from '@/types/patients';
-
-const patients: UiPatient[] = (patientsJson as { data: RawPatient[] }).data.map((p) => ({
-     id: p.id,
-     name: `${p.first_name} ${p.last_name}`,
-     id_number: p.id_number,
-     therapist: 'Dr. Anya Sharma',
-     email: p.email ?? '',
-     diagnosis: p.diagnosis ?? '',
-}));
+import usePatients from '@/hooks/patients/usePatients';
+import { useState } from 'react';
 
 export default function PatientsTable() {
+     const [page, setPage] = useState(1);
+     const { data: patients, meta, isLoading, error, refetch } = usePatients({ limit: 10, page });
+
+     if (isLoading) {
+          return <div className="text-white">Loading patients...</div>;
+     }
+     if (error) {
+          return <div className="text-red-800 p-4 bg-red-400">Error loading patients: {error}</div>;
+     }
+
      return (
           <div className="py-3 flex flex-col gap-5">
-               <PatientsFilters />
+               <PatientsFilters onReload={refetch} />
 
                <div className="overflow-x-auto rounded-lg border border-[#324d67] bg-[#111a22]">
                     <table className="w-full min-w-[800px] table-fixed">
@@ -48,34 +51,30 @@ export default function PatientsTable() {
                                         key={patient.id}
                                         className="border-t border-[#324d67] hover:bg-[#192633] transition-colors"
                                    >
-                                        {/* Nombre del paciente - siempre visible */}
-                                        <td className="h-12 px-4 py-2 text-white font-medium">{patient.name}</td>
+                                        <td className="h-12 px-4 py-2 text-white font-medium">
+                                             {patient.first_name + ' ' + patient.last_name}
+                                        </td>
 
-                                        {/* ID - oculto en pantallas muy pequeñas, aparece en sm+ */}
                                         <td className="h-12 px-4 py-2 text-[#92adc9] text-sm hidden sm:table-cell">
                                              {patient.id_number}
                                         </td>
 
-                                        {/* Therapist - solo en lg+ (estático por ahora) */}
                                         <td className="h-12 px-4 py-2 text-[#92adc9] text-sm hidden lg:table-cell">
-                                             {patient.therapist}
+                                             {patient.psychologist_id}
                                         </td>
 
-                                        {/* Email - visible en md+ */}
                                         <td className="h-12 px-4 py-2 text-[#92adc9] text-sm hidden md:table-cell">
                                              <div className="truncate" title={patient.email ?? ''}>
                                                   {patient.email}
                                              </div>
                                         </td>
 
-                                        {/* Diagnosis - visible en xl+ y oculta antes (primero en desaparecer) */}
                                         <td className="h-12 px-4 py-2 text-[#92adc9] text-sm hidden xl:table-cell">
                                              <div className="truncate" title={patient.diagnosis ?? ''}>
                                                   {patient.diagnosis}
                                              </div>
                                         </td>
 
-                                        {/* Acciones - siempre visible */}
                                         <td className="h-12 px-4 py-2 text-center">
                                              <button className="text-white hover:text-cyan-400 transition-colors">
                                                   <MoreHorizontal className="w-5 h-5 text-white" />
@@ -87,8 +86,7 @@ export default function PatientsTable() {
                     </table>
                </div>
 
-               {/* Paginación (componente separado) */}
-               <Pagination />
+               <Pagination meta={meta} page={page} setPage={setPage} limit={10} />
           </div>
      );
 }

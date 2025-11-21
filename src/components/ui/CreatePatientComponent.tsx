@@ -8,20 +8,30 @@ import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from './Button';
+import useCreatePatient from '@/hooks/patients/useCreatePatient';
 
 export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+     const { mutate, isLoading, error } = useCreatePatient();
+
+     // React Hook Form setup
      const {
           register,
           handleSubmit,
+          reset,
           formState: { errors },
      } = useForm<CreatePatientInterface>({
           resolver: zodResolver(createPatientSchema),
           mode: 'onBlur',
      });
 
-     const onSubmit = (data: CreatePatientInterface) => {
-          console.log('Datos validados', data);
-          onClose();
+     const onSubmit = async (data: CreatePatientInterface) => {
+          try {
+               await mutate(data);
+               reset();
+               // onClose();
+          } catch (error) {
+               console.error('Error submitting form:', error);
+          }
      };
 
      // Modal visibility and animation states
@@ -85,6 +95,12 @@ export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: bo
 
                          {/* body */}
                          <div className="p-6 space-y-6">
+                              {error && (
+                                   <p className="bg-red-200 p-2 rounded-2xl text-red-500 text-center font-semibold">
+                                        Error: {error}
+                                   </p>
+                              )}
+
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                    <Input
                                         label="Nombre"
@@ -155,7 +171,9 @@ export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: bo
                                    Cancelar
                               </Button>
 
-                              <Button type="submit">Guardar Paciente</Button>
+                              <Button type="submit" loading={isLoading}>
+                                   Guardar Paciente
+                              </Button>
                          </div>
                     </form>
                </div>

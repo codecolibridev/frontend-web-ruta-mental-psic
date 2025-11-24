@@ -28,6 +28,7 @@ export interface Patient {
      email: string;
      notes: string;
      diagnosis: string;
+     psychologist: shortPsychologist | null;
      updated_at: string | null;
      deleted_at: string | null;
      created_at: string;
@@ -39,4 +40,10 @@ export interface UsePatientsResult {
      isLoading: boolean;
      error: string | null;
      refetch: () => void;
+}
+
+interface shortPsychologist {
+     id: number | null;
+     first_name: string | null;
+     last_name: string | null;
 }

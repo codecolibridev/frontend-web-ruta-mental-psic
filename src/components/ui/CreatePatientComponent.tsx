@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Button from './Button';
 import useCreatePatient from '@/hooks/patients/useCreatePatient';
-import usePsychologistic from '@/hooks/psychologistic/usePsychologistic';
+import usePsychologist from '@/hooks/psychologistic/usePsychologist';
 import { toast } from 'sonner';
 
 export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -18,7 +18,7 @@ export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: bo
      const [psychologistSearch, setPsychologistSearch] = useState('');
 
      // Buscar psicólogos dinámicamente según lo que el usuario escriba
-     const { data: psychologists, isLoading: psychologistsLoading } = usePsychologistic({
+     const { data: psychologists, isLoading: psychologistsLoading } = usePsychologist({
           limit: 50,
           search: psychologistSearch,
      });

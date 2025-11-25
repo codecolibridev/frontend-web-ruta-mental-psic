@@ -12,18 +12,35 @@ export default function PatientsTable() {
      const [page, setPage] = useState(1);
      const [showModal, setShowModal] = useState(false);
      const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
-     const { data: patients, meta, isLoading, error, refetch } = usePatients({ limit: 10, page });
 
-     if (isLoading) {
-          return <div className="text-white">Loading patients...</div>;
-     }
+     const [searchInput, setSearchInput] = useState('');
+     const [search, setSearch] = useState('');
+     const { data: patients, meta, isLoading, error, refetch } = usePatients({ limit: 10, page, search });
+
+     // if (isLoading) {
+     //      return <div className="text-white">Loading patients...</div>;
+     // }
      if (error) {
           return <div className="text-red-800 p-4 bg-red-400">Error loading patients: {error}</div>;
      }
 
      return (
           <div className="py-3 flex flex-col gap-5">
-               <PatientsFilters onReload={refetch} />
+               <PatientsFilters
+                    onSearch={() => {
+                         setPage(1);
+                         setSearch(searchInput);
+                    }}
+                    onReload={() => {
+                         setSearchInput('');
+                         setSearch('');
+                         setPage(1);
+                         refetch();
+                    }}
+                    search={searchInput}
+                    setSearch={setSearchInput}
+                    loading={isLoading}
+               />
 
                <div className="overflow-x-auto rounded-lg border border-[#324d67] bg-[#111a22]">
                     <table className="w-full min-w-[800px] table-fixed">

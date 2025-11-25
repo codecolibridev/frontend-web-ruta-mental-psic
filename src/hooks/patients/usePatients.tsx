@@ -11,14 +11,14 @@ export default function usePatients(options?: UseParamsOptions): UsePatientsResu
      const [loading, setLoading] = useState<boolean>(false);
      const [error, setError] = useState<string | null>(null);
 
-     const { limit, page } = options || {};
+     const { limit, page, search } = options || {};
 
      const fetchPatients = async () => {
           try {
                setLoading(true);
                setError(null);
 
-               const res = await getPatients({ limit, page });
+               const res = await getPatients({ limit, page, search });
                setData(res.data);
                setMeta(res.meta);
           } catch (error) {
@@ -32,7 +32,7 @@ export default function usePatients(options?: UseParamsOptions): UsePatientsResu
      useEffect(() => {
           fetchPatients();
           // eslint-disable-next-line react-hooks/exhaustive-deps
-     }, [limit, page]);
+     }, [limit, page, search]);
 
      return {
           data,

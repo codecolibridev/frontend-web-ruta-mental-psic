@@ -1,10 +1,15 @@
 import { ChevronDown, Search, RefreshCw } from 'lucide-react';
+import Button from './Button';
 
 type PatientsFiltersProps = {
-     onReload?: () => void;
+     search: string;
+     loading: boolean;
+     setSearch: (value: string) => void;
+     onSearch: () => void;
+     onReload: () => void;
 };
 
-export default function PatientsFilters({ onReload }: PatientsFiltersProps) {
+export default function PatientsFilters({ search, setSearch, onSearch, onReload, loading }: PatientsFiltersProps) {
      return (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap items-center gap-4">
                {/* Buscador */}
@@ -15,9 +20,13 @@ export default function PatientsFilters({ onReload }: PatientsFiltersProps) {
                                    type="button"
                                    aria-label="Reload data"
                                    onClick={() => onReload?.()}
-                                   className="flex h-full items-center justify-center bg-[#233648] px-3 rounded-lg hover:bg-[#2d445c] transition-colors"
+                                   disabled={loading}
+                                   aria-busy={loading}
+                                   className={`flex h-full items-center justify-center bg-[#233648] px-3 rounded-lg hover:bg-[#2d445c] transition-colors ${
+                                        loading ? 'cursor-wait opacity-80' : ''
+                                   }`}
                               >
-                                   <RefreshCw className="w-5 h-5 text-[#92adc9]" />
+                                   <RefreshCw className={`w-5 h-5 text-[#92adc9] ${loading ? 'animate-spin' : ''}`} />
                               </button>
 
                               <div className="flex w-full flex-1 items-stretch rounded-lg h-full overflow-hidden bg-[#233648]">
@@ -28,8 +37,29 @@ export default function PatientsFilters({ onReload }: PatientsFiltersProps) {
                                    <input
                                         type="text"
                                         placeholder="Search by name or patient ID..."
-                                        className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-white focus:outline-0 focus:ring-2 focus:ring-cyan-500/50 border-none bg-transparent h-full placeholder:text-[#92adc9] px-4 pl-2 text-base font-normal leading-normal"
+                                        className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-white focus:outline-0 border-none bg-transparent h-full placeholder:text-[#92adc9] px-4 pl-2 text-base font-normal leading-normal"
+                                        value={search}
+                                        onChange={(e) => {
+                                             const val = e.target.value;
+                                             setSearch(val);
+                                             if (val === '') {
+                                                  onSearch?.();
+                                             }
+                                        }}
+                                        onKeyDown={(e) => {
+                                             if (e.key === 'Enter') {
+                                                  onSearch?.();
+                                             }
+                                        }}
                                    />
+
+                                   <Button
+                                        className="min-w-[110px] h-full rounded-none"
+                                        variant="secondary"
+                                        onClick={() => onSearch?.()}
+                                   >
+                                        Buscar
+                                   </Button>
                               </div>
                          </div>
                     </label>

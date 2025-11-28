@@ -2,26 +2,18 @@
 
 import Input from '@/components/ui/Input';
 import TextArea from '@/components/ui/TextArea';
-import { SelectSearchableField } from '@/components/ui/SelectSearchableField';
 import { CreatePatientInterface, createPatientSchema } from '@/schema/patientSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import Button from './Button';
 import useCreatePatient from '@/hooks/patients/useCreatePatient';
-import usePsychologist from '@/hooks/psychologistic/usePsychologist';
+import PsychologistSelect from './PsychologistSelect';
 import { toast } from 'sonner';
 
 export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
      const { mutate, isLoading } = useCreatePatient();
-     const [psychologistSearch, setPsychologistSearch] = useState('');
-
-     // Buscar psicólogos dinámicamente según lo que el usuario escriba
-     const { data: psychologists, isLoading: psychologistsLoading } = usePsychologist({
-          limit: 50,
-          search: psychologistSearch,
-     });
 
      // React Hook Form setup
      const {
@@ -34,12 +26,6 @@ export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: bo
           resolver: zodResolver(createPatientSchema),
           mode: 'onBlur',
      });
-
-     // Mapear psicólogos a opciones para el SelectSearchable
-     const psychologistOptions = psychologists.map((psychologist) => ({
-          value: psychologist.id,
-          label: `${psychologist.first_name} ${psychologist.last_name}`,
-     }));
 
      const onSubmit = async (data: CreatePatientInterface) => {
           toast.promise(mutate(data), {
@@ -159,16 +145,28 @@ export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: bo
                                         error={errors.email?.message}
                                    />
 
-                                   <SelectSearchableField
-                                        name="psychologist_id"
-                                        control={control}
-                                        label="Psicólogo Asignado"
-                                        options={psychologistOptions}
-                                        placeholder="Seleccionar psicólogo"
-                                        onSearchChange={setPsychologistSearch}
-                                        error={errors.psychologist_id?.message}
-                                        isLoading={psychologistsLoading}
-                                   />
+                                   <div className="flex w-full flex-col text-md">
+                                        <label className="pb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">
+                                             Psicólogo Asignado
+                                        </label>
+                                        <Controller
+                                             name="psychologist_id"
+                                             control={control}
+                                             render={({ field }) => (
+                                                  <PsychologistSelect
+                                                       value={field.value ?? ''}
+                                                       onChange={(val) => field.onChange(val)}
+                                                       placeholder="Seleccionar psicólogo"
+                                                       className="relative w-full"
+                                                  />
+                                             )}
+                                        />
+                                        {errors.psychologist_id?.message && (
+                                             <p className="mt-1 text-sm text-red-500">
+                                                  {errors.psychologist_id?.message}
+                                             </p>
+                                        )}
+                                   </div>
                               </div>
 
                               <TextArea

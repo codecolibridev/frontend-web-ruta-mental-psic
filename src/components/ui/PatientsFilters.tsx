@@ -1,16 +1,13 @@
 import { Search, RefreshCw } from 'lucide-react';
 import Button from './Button';
-import { SelectSearchable } from './SelectSearchable';
+import PsychologistSelect from './PsychologistSelect';
 
 type PatientsFiltersProps = {
      search: string;
      psychologist_id: number | null;
      loading: boolean;
-     psychologistOptions: { value: string | number; label: string }[];
-     psychologistsLoading: boolean;
      setSearch: (value: string) => void;
      setPsychologistId: (value: number | null) => void;
-     onSearchPsychologist: (search: string) => void;
      onSearch: () => void;
      onReload: () => void;
 };
@@ -20,9 +17,7 @@ export default function PatientsFilters({
      psychologist_id,
      setSearch,
      setPsychologistId,
-     psychologistOptions,
-     psychologistsLoading,
-     onSearchPsychologist,
+
      onSearch,
      onReload,
      loading,
@@ -84,15 +79,10 @@ export default function PatientsFilters({
 
                {/* Filtro de Psicólogo */}
                <div className="w-full sm:w-auto sm:min-w-[280px] sm:max-w-[320px]">
-                    <SelectSearchable
-                         options={psychologistOptions}
-                         value={psychologist_id || ''}
-                         onChange={(val) => {
-                              const newVal = val === '' || val === null ? null : Number(val);
-                              setPsychologistId(newVal);
-                         }}
-                         placeholder={psychologistsLoading ? 'Cargando...' : 'Buscar por Psicólogo'}
-                         onSearchChange={onSearchPsychologist}
+                    <PsychologistSelect
+                         value={psychologist_id ?? ''}
+                         onChange={(val) => setPsychologistId(val)}
+                         placeholder="Buscar por Psicólogo"
                     />
                </div>
           </div>

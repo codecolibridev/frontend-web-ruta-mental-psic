@@ -79,7 +79,7 @@ export function SelectSearchable({
      };
 
      return (
-          <div ref={containerRef} className={className ?? 'relative w-full max-w-xs'}>
+          <div ref={containerRef} className={className ? className : 'relative w-full max-w-xs'}>
                {label && (
                     <label className="pb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{label}</label>
                )}

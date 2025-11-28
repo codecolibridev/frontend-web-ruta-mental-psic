@@ -7,7 +7,6 @@ import usePatients from '@/hooks/patients/usePatients';
 import { useState } from 'react';
 import PatientDetailsModal from '../layout/PatientDetailsModal';
 import { Patient } from '@/types/patients';
-import usePsychologist from '@/hooks/psychologistic/usePsychologist';
 
 export default function PatientsTable() {
      const [page, setPage] = useState(1);
@@ -17,12 +16,6 @@ export default function PatientsTable() {
      const [searchInput, setSearchInput] = useState('');
      const [search, setSearch] = useState('');
      const [psychologistId, setPsychologistId] = useState<number | null>(null);
-     const [psychologistSearch, setPsychologistSearch] = useState('');
-
-     const { data: psychologists, isLoading: psychologistsLoading } = usePsychologist({
-          limit: 50,
-          search: psychologistSearch,
-     });
 
      const {
           data: patients,
@@ -44,10 +37,7 @@ export default function PatientsTable() {
           return <div className="text-red-800 p-4 bg-red-400">Error loading patients: {error}</div>;
      }
 
-     const psychologistOptions = psychologists.map((psychologist) => ({
-          value: psychologist.id,
-          label: `${psychologist.first_name} ${psychologist.last_name}`,
-     }));
+     // Psychologist selection is handled inside `PatientsFilters` via `PsychologistSelect`
 
      return (
           <div className="py-3 flex flex-col gap-5">
@@ -70,9 +60,6 @@ export default function PatientsTable() {
                          setPsychologistId(id);
                          setPage(1);
                     }}
-                    psychologistOptions={psychologistOptions}
-                    psychologistsLoading={psychologistsLoading}
-                    onSearchPsychologist={setPsychologistSearch}
                     loading={isLoading}
                />
 

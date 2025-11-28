@@ -36,3 +36,14 @@ export async function updatePatient(patientId: number, patientData: Partial<Crea
           throw new Error(friendlyMessage);
      }
 }
+
+// delete a patient record
+export async function deletePatient(patientId: number): Promise<Patient> {
+     try {
+          const response = await apiClient.delete<Patient>(`/patient/${patientId}`);
+          return response.data;
+     } catch (error: unknown) {
+          const friendlyMessage = translateBackendError(error);
+          throw new Error(friendlyMessage);
+     }
+}

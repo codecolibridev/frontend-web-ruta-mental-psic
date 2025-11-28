@@ -7,13 +7,14 @@ import usePatients from '@/hooks/patients/usePatients';
 import { useState } from 'react';
 import PatientDetailsModal from '../layout/PatientDetailsModal';
 import { Patient } from '@/types/patients';
-import { UpdatePatientComponent } from '@/components/index';
+import { UpdatePatientComponent, DeletePatientComponent } from '@/components/index';
 
 export default function PatientsTable() {
      const [page, setPage] = useState(1);
      const [showModal, setShowModal] = useState(false);
      const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
      const [editingPatient, setEditingPatient] = useState<Patient | null>(null);
+     const [deletingPatient, setDeletingPatient] = useState<Patient | null>(null);
 
      const [searchInput, setSearchInput] = useState('');
      const [search, setSearch] = useState('');
@@ -154,6 +155,7 @@ export default function PatientsTable() {
                                                   <button
                                                        className="text-[#92adc9] hover:text-red-400 transition-all duration-200 p-1.5 rounded hover:bg-red-200/20 hover:scale-110 cursor-pointer"
                                                        onClick={(e) => {
+                                                            setDeletingPatient(patient);
                                                             e.stopPropagation();
                                                             // Acción de eliminar
                                                        }}
@@ -177,6 +179,13 @@ export default function PatientsTable() {
                />
 
                <PatientDetailsModal isOpen={showModal} patient={selectedPatient} onClose={() => setShowModal(false)} />
+
+               <DeletePatientComponent
+                    isOpen={deletingPatient !== null}
+                    onClose={() => setDeletingPatient(null)}
+                    patient={deletingPatient}
+                    onSuccess={() => refetch()}
+               />
 
                <Pagination meta={meta} page={page} setPage={setPage} limit={10} />
           </div>

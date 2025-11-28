@@ -21,7 +21,7 @@ export default function usePsychologistic(options: UseParamsOptions) {
                setMeta(res.meta);
           } catch (error) {
                console.error('Error fetching psychologistic data:', error);
-               setError((error as Error)?.message || 'Error cargando datos psicologísticos');
+               setError((error as Error)?.message || 'Error cargando datos de psicólogos');
           } finally {
                setLoading(false);
           }

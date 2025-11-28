@@ -12,6 +12,7 @@ import PsychologistSelect from './PsychologistSelect';
 import { toast } from 'sonner';
 import useUpdatePatient from '@/hooks/patients/useUpdatePatient';
 import { Patient } from '@/types/patients';
+import { formatDateForInput } from '@/utils/date-utils';
 
 export default function UpdatePatientComponent({
      isOpen,
@@ -44,7 +45,7 @@ export default function UpdatePatientComponent({
                     first_name: patient.first_name,
                     last_name: patient.last_name,
                     id_number: patient.id_number,
-                    birth_date: patient.birth_date,
+                    birth_date: formatDateForInput(patient.birth_date),
                     email: patient.email,
                     psychologist_id: patient.psychologist_id,
                     notes: patient.notes ?? '',

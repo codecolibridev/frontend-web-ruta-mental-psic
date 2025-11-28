@@ -1,15 +1,32 @@
-import { ChevronDown, Search, RefreshCw } from 'lucide-react';
+import { Search, RefreshCw } from 'lucide-react';
 import Button from './Button';
+import { SelectSearchable } from './SelectSearchable';
 
 type PatientsFiltersProps = {
      search: string;
+     psychologist_id: number | null;
      loading: boolean;
+     psychologistOptions: { value: string | number; label: string }[];
+     psychologistsLoading: boolean;
      setSearch: (value: string) => void;
+     setPsychologistId: (value: number | null) => void;
+     onSearchPsychologist: (search: string) => void;
      onSearch: () => void;
      onReload: () => void;
 };
 
-export default function PatientsFilters({ search, setSearch, onSearch, onReload, loading }: PatientsFiltersProps) {
+export default function PatientsFilters({
+     search,
+     psychologist_id,
+     setSearch,
+     setPsychologistId,
+     psychologistOptions,
+     psychologistsLoading,
+     onSearchPsychologist,
+     onSearch,
+     onReload,
+     loading,
+}: PatientsFiltersProps) {
      return (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-wrap items-center gap-4">
                {/* Buscador */}
@@ -65,22 +82,18 @@ export default function PatientsFilters({ search, setSearch, onSearch, onReload,
                     </label>
                </div>
 
-               {/* Filtros tipo chip */}
-               <div className="flex gap-3 overflow-x-auto pb-1 lg:pb-0">
-                    <button className="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#233648] pl-4 pr-3 hover:bg-[#2d445c] transition-colors">
-                         <p className="text-white text-sm font-medium leading-normal">Status: All</p>
-                         <ChevronDown className="w-5 h-5 text-white" />
-                    </button>
-
-                    <button className="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#233648] pl-4 pr-3 hover:bg-[#2d445c] transition-colors">
-                         <p className="text-white text-sm font-medium leading-normal">Therapist: All</p>
-                         <ChevronDown className="w-5 h-5 text-white" />
-                    </button>
-
-                    <button className="flex h-12 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-[#233648] pl-4 pr-3 hover:bg-[#2d445c] transition-colors">
-                         <p className="text-white text-sm font-medium leading-normal">Last Appointment</p>
-                         <ChevronDown className="w-5 h-5 text-white" />
-                    </button>
+               {/* Filtro de Psicólogo */}
+               <div className="w-full sm:w-auto sm:min-w-[280px] sm:max-w-[320px]">
+                    <SelectSearchable
+                         options={psychologistOptions}
+                         value={psychologist_id || ''}
+                         onChange={(val) => {
+                              const newVal = val === '' || val === null ? null : Number(val);
+                              setPsychologistId(newVal);
+                         }}
+                         placeholder={psychologistsLoading ? 'Cargando...' : 'Buscar por Psicólogo'}
+                         onSearchChange={onSearchPsychologist}
+                    />
                </div>
           </div>
      );

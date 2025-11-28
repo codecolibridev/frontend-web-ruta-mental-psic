@@ -6,9 +6,10 @@ import { translateBackendError } from './errors/errorTranslator';
 
 // fetch a paginated list of patients from the API
 export async function getPatients(params: UseParamsOptions): Promise<PaginatedResponse<Patient>> {
-     const { limit, page, search } = params;
+     const { limit, page, search, psychologist_id } = params;
+
      const response = await apiClient.get<PaginatedResponse<Patient>>('/patient', {
-          params: { limit, page, search },
+          params: { limit, page, search, psychologist_id },
      });
 
      return response.data;

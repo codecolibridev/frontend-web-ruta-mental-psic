@@ -11,4 +11,5 @@ export interface UseParamsOptions {
      page?: number;
      limit?: number;
      search?: string;
+     psychologist_id?: number;
 }

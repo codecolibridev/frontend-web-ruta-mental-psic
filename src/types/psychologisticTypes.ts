@@ -3,7 +3,6 @@ export interface Psychologistic {
      first_name: string;
      last_name: string;
      email: string;
-     password: string;
      role_id: number;
      created_at: string;
      updated_at: string | null;

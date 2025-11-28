@@ -1,4 +1,4 @@
-import { getPsychologistic } from '@/services/psychologisticService';
+import { getPsychologist } from '@/services/psychologisticService';
 import { Psychologistic } from '@/types/psychologisticTypes';
 import { PaginatedResponse, UseParamsOptions } from '@/types/responseTypes';
 import { useEffect, useState } from 'react';
@@ -11,24 +11,24 @@ export default function usePsychologistic(options: UseParamsOptions) {
 
      const { limit, page, search } = options || {};
 
-     const fecthhPsychologisticData = async () => {
+     const fetchPsychologistData = async () => {
           try {
                setLoading(true);
                setError(null);
 
-               const res = await getPsychologistic({ limit, page, search });
+               const res = await getPsychologist({ limit, page, search });
                setData(res.data);
                setMeta(res.meta);
           } catch (error) {
                console.error('Error fetching psychologistic data:', error);
-               setError((error as Error)?.message || 'Error cargando datos psicologísticos');
+               setError((error as Error)?.message || 'Error cargando datos de psicólogos');
           } finally {
                setLoading(false);
           }
      };
 
      useEffect(() => {
-          fecthhPsychologisticData();
+          fetchPsychologistData();
           // eslint-disable-next-line react-hooks/exhaustive-deps
      }, [limit, page, search]);
 
@@ -37,6 +37,6 @@ export default function usePsychologistic(options: UseParamsOptions) {
           meta,
           isLoading: loading,
           error,
-          refetch: fecthhPsychologisticData,
+          refetch: fetchPsychologistData,
      };
 }

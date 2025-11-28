@@ -8,6 +8,9 @@ export { default as WeeklyActivityChart } from './layout/WeeklyMonthActivityChar
 export { default as PatientsTable } from './ui/PatientsTable';
 export { default as CreatePatientComponent } from './ui/CreatePatientComponent';
 
+export { SelectSearchable } from './ui/SelectSearchable';
+export { SelectSearchableField } from './ui/SelectSearchableField';
+
 export { default as Navbar } from './ui/Navbar';
 
 export { default as ConditionalNavbar } from './layout/ConditionalNavbar';

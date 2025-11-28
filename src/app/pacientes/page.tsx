@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { PageHeader } from '@/components/index';
-import { Button, PatientsTable, CreatePatientComponent } from '@/components/index';
+import { Button, CreatePatientComponent, PageHeader, PatientsTable } from '@/components/index';
 import { Plus } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Page() {
      const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,6 +21,7 @@ export default function Page() {
                          Nuevo paciente
                     </Button>
                </div>
+
                <PatientsTable />
 
                <CreatePatientComponent isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />

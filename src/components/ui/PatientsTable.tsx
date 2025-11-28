@@ -5,9 +5,13 @@ import Pagination from './Pagination';
 import PatientsFilters from './PatientsFilters';
 import usePatients from '@/hooks/patients/usePatients';
 import { useState } from 'react';
+import PatientDetailsModal from '../layout/PatientDetailsModal';
+import { Patient } from '@/types/patients';
 
 export default function PatientsTable() {
      const [page, setPage] = useState(1);
+     const [showModal, setShowModal] = useState(false);
+     const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
      const { data: patients, meta, isLoading, error, refetch } = usePatients({ limit: 10, page });
 
      if (isLoading) {
@@ -49,7 +53,11 @@ export default function PatientsTable() {
                               {patients.map((patient) => (
                                    <tr
                                         key={patient.id}
-                                        className="border-t border-[#324d67] hover:bg-[#192633] transition-colors"
+                                        className="border-t border-[#324d67] hover:bg-[#192633] transition-colors cursor-pointer"
+                                        onClick={() => {
+                                             setSelectedPatient(patient);
+                                             setShowModal(true);
+                                        }}
                                    >
                                         <td className="h-12 px-4 py-2 text-white font-medium">
                                              {patient.first_name + ' ' + patient.last_name}
@@ -60,7 +68,11 @@ export default function PatientsTable() {
                                         </td>
 
                                         <td className="h-12 px-4 py-2 text-[#92adc9] text-sm hidden lg:table-cell">
-                                             {patient.psychologist_id}
+                                             {patient.psychologist
+                                                  ? patient.psychologist.first_name +
+                                                    ' ' +
+                                                    patient.psychologist.last_name
+                                                  : ''}
                                         </td>
 
                                         <td className="h-12 px-4 py-2 text-[#92adc9] text-sm hidden md:table-cell">
@@ -76,7 +88,10 @@ export default function PatientsTable() {
                                         </td>
 
                                         <td className="h-12 px-4 py-2 text-center">
-                                             <button className="text-white hover:text-cyan-400 transition-colors">
+                                             <button
+                                                  className="text-white hover:text-cyan-400 transition-colors"
+                                                  onClick={(e) => e.stopPropagation()}
+                                             >
                                                   <MoreHorizontal className="w-5 h-5 text-white" />
                                              </button>
                                         </td>
@@ -85,6 +100,8 @@ export default function PatientsTable() {
                          </tbody>
                     </table>
                </div>
+
+               <PatientDetailsModal isOpen={showModal} patient={selectedPatient} onClose={() => setShowModal(false)} />
 
                <Pagination meta={meta} page={page} setPage={setPage} limit={10} />
           </div>

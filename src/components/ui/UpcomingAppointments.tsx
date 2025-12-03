@@ -1,15 +1,23 @@
-import { MoreVertical } from 'lucide-react';
-import upcoming from '../../data/upcoming-appointments.json';
+'use client';
 
-type Appointment = {
-     id: number;
-     time: string;
-     name: string;
-     type: string;
-};
+import useUpcomingAppointments from '@/hooks/appointment/useUpcomingAppointments';
+import { MoreVertical } from 'lucide-react';
+import { useEffect } from 'react';
 
 export default function UpcomingAppointments() {
-     const data = upcoming as { appointments: Appointment[] };
+     const { data, loading, error, fetchUpcomingAppointments } = useUpcomingAppointments();
+
+     useEffect(() => {
+          fetchUpcomingAppointments();
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+     }, []);
+
+     if (loading) {
+          return <div>Cargando próximas citas...</div>;
+     }
+     if (error) {
+          return <div className="text-red-400">{error}</div>;
+     }
 
      return (
           <section className="bg-[#2D3748] p-6 rounded-xl border border-[#4A5568]/50">
@@ -21,7 +29,7 @@ export default function UpcomingAppointments() {
                </div>
 
                <div className="flex flex-col gap-4 max-h-96 overflow-auto">
-                    {data.appointments.map((appt) => (
+                    {data.map((appt) => (
                          <div
                               key={appt.id}
                               className="mr-2 flex items-center gap-4 p-3 rounded-lg hover:bg-[#1A202C] transition-colors duration-200 cursor-pointer"

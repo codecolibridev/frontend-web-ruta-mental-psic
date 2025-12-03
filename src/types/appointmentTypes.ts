@@ -28,3 +28,11 @@ export interface ActivityDataAppointment {
      last7days: Last7Day[];
      last30days: Last30Day[];
 }
+
+// upcoming appointments
+export interface UpcomingAppointment {
+     id: number;
+     time: string;
+     name: string;
+     type: 'Confirmada' | 'Pendiente' | 'Cancelada';
+}

@@ -1,8 +1,9 @@
 'use client';
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { formatDateForChartTooltip } from '@/utils/date-utils';
 
-type ChartPoint = { label: string; count: number };
+type ChartPoint = { label: string; count: number; date: string };
 
 export default function BarActivityChart({ data }: { data: ChartPoint[] }) {
      return (
@@ -30,6 +31,18 @@ export default function BarActivityChart({ data }: { data: ChartPoint[] }) {
                               border: '1px solid rgba(74,85,104,0.5)',
                               borderRadius: '6px',
                               color: '#E2E8F0',
+                         }}
+                         labelFormatter={(label, payload) => {
+                            if (payload && payload.length > 0) {
+                                return formatDateForChartTooltip(payload[0].payload.date);
+                            }
+                            return label;
+                         }}
+                         formatter={(value, name) => {
+                              if (name === 'count') {
+                                   return [`Citas: ${value}`];
+                              }
+                              return [value, name];
                          }}
                     />
                     <Bar

@@ -1,8 +1,9 @@
 'use client';
 
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { formatDateForChartTooltip, formatDateForChartXAxis } from '@/utils/date-utils';
 
-type ChartPoint = { day: number; count: number };
+type ChartPoint = { date: string; count: number };
 
 export default function AreaActivityChart({ data }: { data: ChartPoint[] }) {
      return (
@@ -17,11 +18,12 @@ export default function AreaActivityChart({ data }: { data: ChartPoint[] }) {
                          ticks={[0, 2, 4, 6, 8, 10]}
                     />
                     <XAxis
-                         dataKey="day"
+                         dataKey="date"
                          dy={6}
                          tick={{ fill: '#A0AEC0', fontSize: 12 }}
                          axisLine={false}
                          tickLine={false}
+                         tickFormatter={formatDateForChartXAxis}
                     />
                     <Tooltip
                          cursor={{ fill: '#63B3ED', opacity: 0.1 }}
@@ -30,6 +32,13 @@ export default function AreaActivityChart({ data }: { data: ChartPoint[] }) {
                               border: '1px solid rgba(74,85,104,0.5)',
                               borderRadius: '6px',
                               color: '#E2E8F0',
+                         }}
+                         labelFormatter={formatDateForChartTooltip}
+                         formatter={(value, name) => {
+                              if (name === 'count') {
+                                   return [`Citas: ${value}`];
+                              }
+                              return [value, name];
                          }}
                     />
                     <Area

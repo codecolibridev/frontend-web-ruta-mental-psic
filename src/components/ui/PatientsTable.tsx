@@ -1,17 +1,20 @@
 'use client';
 
-import { MoreHorizontal } from 'lucide-react';
+import { Pencil, Eye, Trash2 } from 'lucide-react';
 import Pagination from './Pagination';
 import PatientsFilters from './PatientsFilters';
 import usePatients from '@/hooks/patients/usePatients';
 import { useState } from 'react';
 import PatientDetailsModal from '../layout/PatientDetailsModal';
 import { Patient } from '@/types/patients';
+import { UpdatePatientComponent, DeletePatientComponent } from '@/components/index';
 
 export default function PatientsTable() {
      const [page, setPage] = useState(1);
      const [showModal, setShowModal] = useState(false);
      const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
+     const [editingPatient, setEditingPatient] = useState<Patient | null>(null);
+     const [deletingPatient, setDeletingPatient] = useState<Patient | null>(null);
 
      const [searchInput, setSearchInput] = useState('');
      const [search, setSearch] = useState('');
@@ -82,7 +85,7 @@ export default function PatientsTable() {
                                    <th className="px-4 py-3 text-left text-sm font-medium text-white hidden xl:table-cell">
                                         Diagnosis
                                    </th>
-                                   <th className="w-20 px-4 py-3 text-center text-sm font-medium text-white">
+                                   <th className="w-32 px-4 py-3 text-center text-sm font-medium text-white">
                                         Actions
                                    </th>
                               </tr>
@@ -97,15 +100,15 @@ export default function PatientsTable() {
                                              setShowModal(true);
                                         }}
                                    >
-                                        <td className="h-12 px-4 py-2 text-white font-medium">
+                                        <td className="h-12 2xl:h-14 px-4 py-2 text-white font-medium">
                                              {patient.first_name + ' ' + patient.last_name}
                                         </td>
 
-                                        <td className="h-12 px-4 py-2 text-[#92adc9] text-sm hidden sm:table-cell">
+                                        <td className="h-12 2xl:h-14 px-4 py-2 text-[#92adc9] text-sm hidden sm:table-cell">
                                              {patient.id_number}
                                         </td>
 
-                                        <td className="h-12 px-4 py-2 text-[#92adc9] text-sm hidden lg:table-cell">
+                                        <td className="h-12 2xl:h-14 px-4 py-2 text-[#92adc9] text-sm hidden lg:table-cell">
                                              {patient.psychologist
                                                   ? patient.psychologist.first_name +
                                                     ' ' +
@@ -113,25 +116,54 @@ export default function PatientsTable() {
                                                   : ''}
                                         </td>
 
-                                        <td className="h-12 px-4 py-2 text-[#92adc9] text-sm hidden md:table-cell">
+                                        <td className="h-12 2xl:h-14 px-4 py-2 text-[#92adc9] text-sm hidden md:table-cell">
                                              <div className="truncate" title={patient.email ?? ''}>
                                                   {patient.email}
                                              </div>
                                         </td>
 
-                                        <td className="h-12 px-4 py-2 text-[#92adc9] text-sm hidden xl:table-cell">
+                                        <td className="h-12 2xl:h-14 px-4 py-2 text-[#92adc9] text-sm hidden xl:table-cell">
                                              <div className="truncate" title={patient.diagnosis ?? ''}>
                                                   {patient.diagnosis}
                                              </div>
                                         </td>
 
-                                        <td className="h-12 px-4 py-2 text-center">
-                                             <button
-                                                  className="text-white hover:text-cyan-400 transition-colors"
-                                                  onClick={(e) => e.stopPropagation()}
-                                             >
-                                                  <MoreHorizontal className="w-5 h-5 text-white" />
-                                             </button>
+                                        <td className="h-12 2xl:h-14 px-2 py-2">
+                                             <div className="flex items-center justify-center gap-1">
+                                                  <button
+                                                       className="text-[#92adc9] hover:text-blue-300 transition-all duration-200 p-1.5 rounded hover:bg-primary/20 hover:scale-110 cursor-pointer"
+                                                       onClick={(e) => {
+                                                            setShowModal(true);
+                                                            e.stopPropagation();
+                                                       }}
+                                                       title="Ver detalles"
+                                                  >
+                                                       <Eye className="w-4 h-4" />
+                                                  </button>
+
+                                                  <button
+                                                       className="text-[#92adc9] hover:text-blue-300 transition-all duration-200 p-1.5 rounded hover:bg-primary/20 hover:scale-110 cursor-pointer"
+                                                       onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setEditingPatient(patient);
+                                                       }}
+                                                       title="Editar paciente"
+                                                  >
+                                                       <Pencil className="w-4 h-4" />
+                                                  </button>
+
+                                                  <button
+                                                       className="text-[#92adc9] hover:text-red-400 transition-all duration-200 p-1.5 rounded hover:bg-red-200/20 hover:scale-110 cursor-pointer"
+                                                       onClick={(e) => {
+                                                            setDeletingPatient(patient);
+                                                            e.stopPropagation();
+                                                            // Acción de eliminar
+                                                       }}
+                                                       title="Eliminar paciente"
+                                                  >
+                                                       <Trash2 className="w-4 h-4" />
+                                                  </button>
+                                             </div>
                                         </td>
                                    </tr>
                               ))}
@@ -139,7 +171,21 @@ export default function PatientsTable() {
                     </table>
                </div>
 
+               <UpdatePatientComponent
+                    isOpen={editingPatient !== null}
+                    onClose={() => setEditingPatient(null)}
+                    patient={editingPatient}
+                    onSuccess={() => refetch()}
+               />
+
                <PatientDetailsModal isOpen={showModal} patient={selectedPatient} onClose={() => setShowModal(false)} />
+
+               <DeletePatientComponent
+                    isOpen={deletingPatient !== null}
+                    onClose={() => setDeletingPatient(null)}
+                    patient={deletingPatient}
+                    onSuccess={() => refetch()}
+               />
 
                <Pagination meta={meta} page={page} setPage={setPage} limit={10} />
           </div>

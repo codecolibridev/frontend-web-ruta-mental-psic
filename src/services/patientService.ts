@@ -25,3 +25,25 @@ export async function createPatient(patientData: Omit<CreatePatientInterface, 'i
           throw new Error(friendlyMessage);
      }
 }
+
+// update patient record
+export async function updatePatient(patientId: number, patientData: Partial<CreatePatientInterface>): Promise<Patient> {
+     try {
+          const response = await apiClient.patch<Patient>(`/patient/${patientId}`, patientData);
+          return response.data;
+     } catch (error: unknown) {
+          const friendlyMessage = translateBackendError(error);
+          throw new Error(friendlyMessage);
+     }
+}
+
+// delete a patient record
+export async function deletePatient(patientId: number): Promise<Patient> {
+     try {
+          const response = await apiClient.delete<Patient>(`/patient/${patientId}`);
+          return response.data;
+     } catch (error: unknown) {
+          const friendlyMessage = translateBackendError(error);
+          throw new Error(friendlyMessage);
+     }
+}

@@ -12,3 +12,8 @@ export const createPatientSchema = z.object({
 });
 
 export type CreatePatientInterface = z.infer<typeof createPatientSchema>;
+export type UpdatePatientInterface = Partial<CreatePatientInterface>;
+export const deletePatientInterface = z.object({
+     id: z.number(),
+});
+export type DeletePatientInterface = z.infer<typeof deletePatientInterface>;

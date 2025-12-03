@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { User, X } from 'lucide-react';
 import { Patient } from '@/types/patients';
+import { formatDateAndAge } from '@/utils/date-utils';
+import { User, X } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 
 interface PatientDetailsModalProps {
      isOpen: boolean;
@@ -13,24 +14,6 @@ interface PatientDetailsModalProps {
 const PatientDetailsModal: React.FC<PatientDetailsModalProps> = ({ isOpen, onClose, patient = null }) => {
      const [visible, setVisible] = useState<boolean>(isOpen);
      const [closing, setClosing] = useState<boolean>(false);
-
-     const formatDateAndAge = (dateStr?: string | null) => {
-          if (!dateStr) return '-';
-          const d = new Date(dateStr);
-          if (isNaN(d.getTime())) return dateStr;
-
-          const formatter = new Intl.DateTimeFormat('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-          const formatted = formatter.format(d);
-
-          const today = new Date();
-          let age = today.getFullYear() - d.getFullYear();
-          const m = today.getMonth() - d.getMonth();
-          if (m < 0 || (m === 0 && today.getDate() < d.getDate())) {
-               age--;
-          }
-
-          return `${formatted} (${age} años)`;
-     };
 
      useEffect(() => {
           let openerTimer: ReturnType<typeof setTimeout> | undefined;

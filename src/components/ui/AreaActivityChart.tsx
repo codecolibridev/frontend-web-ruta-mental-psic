@@ -2,7 +2,7 @@
 
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-type ChartPoint = { day: string; value: number };
+type ChartPoint = { day: number; count: number };
 
 export default function AreaActivityChart({ data }: { data: ChartPoint[] }) {
      return (
@@ -34,7 +34,7 @@ export default function AreaActivityChart({ data }: { data: ChartPoint[] }) {
                     />
                     <Area
                          type="monotone"
-                         dataKey="value"
+                         dataKey="count"
                          stroke="#63B3ED"
                          strokeWidth={2}
                          fill="#63B3ED"

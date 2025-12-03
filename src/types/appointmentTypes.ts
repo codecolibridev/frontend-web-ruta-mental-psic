@@ -10,3 +10,21 @@ export interface AppointmentStats {
           patientsMonthDiff: number | null;
      };
 }
+
+// recent activity types
+export interface Last7Day {
+     date: string;
+     label: string;
+     count: number;
+}
+
+export interface Last30Day {
+     date: string;
+     day: number;
+     count: number;
+}
+
+export interface ActivityDataAppointment {
+     last7days: Last7Day[];
+     last30days: Last30Day[];
+}

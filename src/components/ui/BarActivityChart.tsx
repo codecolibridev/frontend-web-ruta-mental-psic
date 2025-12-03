@@ -2,7 +2,7 @@
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-type ChartPoint = { day: string; value: number };
+type ChartPoint = { label: string; count: number };
 
 export default function BarActivityChart({ data }: { data: ChartPoint[] }) {
      return (
@@ -17,7 +17,7 @@ export default function BarActivityChart({ data }: { data: ChartPoint[] }) {
                          ticks={[0, 2, 4, 6, 8, 10]}
                     />
                     <XAxis
-                         dataKey="day"
+                         dataKey="label"
                          dy={6}
                          tick={{ fill: '#A0AEC0', fontSize: 12 }}
                          axisLine={false}
@@ -33,7 +33,7 @@ export default function BarActivityChart({ data }: { data: ChartPoint[] }) {
                          }}
                     />
                     <Bar
-                         dataKey="value"
+                         dataKey="count"
                          radius={7}
                          fill="#63B3ED"
                          fillOpacity={0.2}

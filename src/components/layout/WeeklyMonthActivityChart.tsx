@@ -71,7 +71,7 @@ export default function ActivityChart() {
                </div>
 
                {/* CHART */}
-               <div className="h-80 flex-1 **:outline-none **:focus:outline-none">
+               <div className="w-full h-80 **:outline-none **:focus:outline-none">
                     {isWeek ? (
                          <BarActivityChart data={last7days || []} />
                     ) : (

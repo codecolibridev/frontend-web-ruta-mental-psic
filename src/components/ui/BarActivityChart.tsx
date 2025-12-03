@@ -6,7 +6,7 @@ type ChartPoint = { label: string; count: number };
 
 export default function BarActivityChart({ data }: { data: ChartPoint[] }) {
      return (
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height={320}>
                <BarChart data={data} margin={{ top: 20, right: 0, left: 0, bottom: 10 }}>
                     <CartesianGrid stroke="#4A5568" strokeOpacity={0.5} vertical={false} />
                     <YAxis

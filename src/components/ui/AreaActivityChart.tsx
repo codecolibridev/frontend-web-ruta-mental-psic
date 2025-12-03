@@ -6,7 +6,7 @@ type ChartPoint = { day: number; count: number };
 
 export default function AreaActivityChart({ data }: { data: ChartPoint[] }) {
      return (
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height={320}>
                <AreaChart data={data} margin={{ top: 20, right: 0, left: 0, bottom: 10 }}>
                     <CartesianGrid stroke="#4A5568" strokeOpacity={0.5} vertical={false} />
                     <YAxis

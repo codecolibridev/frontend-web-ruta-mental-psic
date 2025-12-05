@@ -14,7 +14,7 @@ export default function useGetRecentActivityAppointment() {
                     setData(res);
                } catch (error) {
                     console.error('Error fetching recent activity appointments:', error);
-                    setError((error as Error)?.message || 'Error cargando estadísticas de citas');
+                    setError((error as Error)?.message || 'Error carargando la actividad reciente de citas.');
                } finally {
                     setLoading(false);
                }

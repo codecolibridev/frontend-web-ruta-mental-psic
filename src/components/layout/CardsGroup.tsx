@@ -12,10 +12,10 @@ export default function CardsGroup() {
      const month = data?.month || 0;
      const patientsThisMonth = data?.patientsThisMonth || 0;
      const comparison = {
-          dayDiff: data?.comparision.todayDiff || 0,
-          weekDiff: data?.comparision.weekDiff || 0,
-          monthDiff: data?.comparision.monthDiff || 0,
-          patientsMonthDiff: data?.comparision.patientsMonthDiff || 0,
+          dayDiff: data?.comparision?.todayDiff || 0,
+          weekDiff: data?.comparision?.weekDiff || 0,
+          monthDiff: data?.comparision?.monthDiff || 0,
+          patientsMonthDiff: data?.comparision?.patientsMonthDiff || 0,
      };
 
      useEffect(() => {

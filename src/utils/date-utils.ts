@@ -37,10 +37,11 @@ export const formatDateAndAge = (dateStr?: string | null) => {
 
      return `${formatted} (${age} años)`;
 };
+
 /**
  * Formats a date string 'YYYY-MM-DD' for a chart tooltip in Spanish.
- * @param {string} dateString - The date string in 'YYYY-MM-DD' format.
- * @returns {string} The formatted date, e.g., "22 de Diciembre de 2025".
+ *@param dateString - The date string in 'YYYY-MM-DD' format.
+ *@returns The formatted date, e.g., "22 de Diciembre de 2025".
  */
 export const formatDateForChartTooltip = (dateString: string) => {
      const [year, month, day] = dateString.split('-').map(Number);
@@ -56,10 +57,13 @@ export const formatDateForChartTooltip = (dateString: string) => {
 
 /**
  * Formats a date string 'YYYY-MM-DD' for a chart's X-axis.
- * @param {string} dateString - The date string in 'YYYY-MM-DD' format.
- * @returns {string} The formatted date, e.g., "03/Dic".
+ *@param dateString - The date string in 'YYYY-MM-DD' format.
+ *@returns The formatted date, e.g., "22 Dic".
  */
 export const formatDateForChartXAxis = (dateString: string) => {
+     if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
+          return dateString;
+     }
      const [year, month, day] = dateString.split('-').map(Number);
      const date = new Date(year, month - 1, day);
      const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short' };

@@ -3,7 +3,7 @@ export interface AppointmentStats {
      week: number | null;
      month: number | null;
      patientsThisMonth: number | null;
-     comparision: {
+     comparison: {
           todayDiff: number | null;
           weekDiff: number | null;
           monthDiff: number | null;

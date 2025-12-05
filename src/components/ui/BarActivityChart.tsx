@@ -33,10 +33,13 @@ export default function BarActivityChart({ data }: { data: ChartPoint[] }) {
                               color: '#E2E8F0',
                          }}
                          labelFormatter={(label, payload) => {
-                            if (payload && payload.length > 0) {
-                                return formatDateForChartTooltip(payload[0].payload.date);
-                            }
-                            return label;
+                              const dateString = payload?.[0]?.payload.date;
+
+                              if (dateString) {
+                                   return formatDateForChartTooltip(dateString);
+                              }
+
+                              return label;
                          }}
                          formatter={(value, name) => {
                               if (name === 'count') {

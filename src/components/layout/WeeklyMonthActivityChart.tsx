@@ -1,19 +1,31 @@
 'use client';
 
+import { AreaActivityChart, BarActivityChart } from '@/components/index';
+import useGetRecentActivityAppointment from '@/hooks/appointment/useGetRecentActivityAppointment';
 import { useState } from 'react';
-import { BarActivityChart, AreaActivityChart } from '@/components/index';
-import activityData from '@/data/activity-data.json';
-import type { ActivityData } from '../../types/activity';
-
-const activity = activityData as unknown as ActivityData;
-const weeklyData = activity.last7days.map((d) => ({ day: d.label, value: d.count }));
-const monthlyData = activity.last30days.map((d) => ({ day: d.label, value: d.count }));
 
 export default function ActivityChart() {
      const [view, setView] = useState<'week' | 'month'>('week');
+     const { data, loading, error } = useGetRecentActivityAppointment();
+     const { last7days, last30days } = data || {};
 
      const isWeek = view === 'week';
-     const data = isWeek ? weeklyData : monthlyData;
+
+     if (loading) {
+          return (
+               <section className="min-h-[400px] md:min-h-auto bg-[#2D3748] flex flex-col items-center justify-center flex-1 p-6 rounded-xl border border-[#4A5568]/50 gap-4">
+                    <p className="text-white">Cargando...</p>
+               </section>
+          );
+     }
+
+     if (error) {
+          return (
+               <section className="min-h-[400px] md:min-h-auto bg-[#2D3748] flex flex-col items-center justify-center flex-1 p-6 rounded-xl border border-[#4A5568]/50 gap-4">
+                    <p className="text-red-400">{error}</p>
+               </section>
+          );
+     }
 
      return (
           <section className="min-h-[400px] md:min-h-auto bg-[#2D3748] flex flex-col flex-1 justify-between p-6 rounded-xl border border-[#4A5568]/50 gap-4">
@@ -59,8 +71,12 @@ export default function ActivityChart() {
                </div>
 
                {/* CHART */}
-               <div className="h-80 flex-1 **:outline-none **:focus:outline-none">
-                    {isWeek ? <BarActivityChart data={data} /> : <AreaActivityChart data={data} />}
+               <div className="w-full h-80 **:outline-none **:focus:outline-none">
+                    {isWeek ? (
+                         <BarActivityChart data={last7days || []} />
+                    ) : (
+                         <AreaActivityChart data={last30days || []} />
+                    )}
                </div>
           </section>
      );

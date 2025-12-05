@@ -1,12 +1,13 @@
 'use client';
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { formatDateForChartTooltip } from '@/utils/date-utils';
 
-type ChartPoint = { day: string; value: number };
+type ChartPoint = { label: string; count: number; date: string };
 
 export default function BarActivityChart({ data }: { data: ChartPoint[] }) {
      return (
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height={320}>
                <BarChart data={data} margin={{ top: 20, right: 0, left: 0, bottom: 10 }}>
                     <CartesianGrid stroke="#4A5568" strokeOpacity={0.5} vertical={false} />
                     <YAxis
@@ -17,7 +18,7 @@ export default function BarActivityChart({ data }: { data: ChartPoint[] }) {
                          ticks={[0, 2, 4, 6, 8, 10]}
                     />
                     <XAxis
-                         dataKey="day"
+                         dataKey="label"
                          dy={6}
                          tick={{ fill: '#A0AEC0', fontSize: 12 }}
                          axisLine={false}
@@ -31,9 +32,24 @@ export default function BarActivityChart({ data }: { data: ChartPoint[] }) {
                               borderRadius: '6px',
                               color: '#E2E8F0',
                          }}
+                         labelFormatter={(label, payload) => {
+                              const dateString = payload?.[0]?.payload.date;
+
+                              if (dateString) {
+                                   return formatDateForChartTooltip(dateString);
+                              }
+
+                              return label;
+                         }}
+                         formatter={(value, name) => {
+                              if (name === 'count') {
+                                   return [`Citas: ${value}`];
+                              }
+                              return [value, name];
+                         }}
                     />
                     <Bar
-                         dataKey="value"
+                         dataKey="count"
                          radius={7}
                          fill="#63B3ED"
                          fillOpacity={0.2}

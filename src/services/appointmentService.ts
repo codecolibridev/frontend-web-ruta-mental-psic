@@ -1,5 +1,11 @@
 import { apiClient } from '@/lib/apiClient';
-import { ActivityDataAppointment, AppointmentStats, UpcomingAppointment } from '@/types/appointmentTypes';
+import { ActivityDataAppointment, AppointmentStats, UpcomingAppointment, Appointment } from '@/types/appointmentTypes';
+import { PaginatedResponse, UseParamsOptions } from '@/types/responseTypes';
+
+export async function getAppointments(options?: UseParamsOptions): Promise<PaginatedResponse<Appointment>> {
+     const response = await apiClient.get<PaginatedResponse<Appointment>>('/appointment', { params: { ...options } });
+     return response.data;
+}
 
 export async function getAppointmentStats(): Promise<AppointmentStats> {
      const response = await apiClient.get<AppointmentStats>('/appointment/stats');

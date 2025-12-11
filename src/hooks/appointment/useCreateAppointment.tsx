@@ -6,10 +6,12 @@ import { useState } from 'react';
 interface UseCreateAppointmentResult {
      mutate: (data: CreateAppointmentInterface) => Promise<Appointment | null>;
      isLoading: boolean;
+     error: string | null;
 }
 
 export default function useCreateAppointment(): UseCreateAppointmentResult {
      const [isLoading, setIsLoading] = useState(false);
+     const [error, setError] = useState<string | null>(null);
 
      const mutate = async (appointmentData: CreateAppointmentInterface): Promise<Appointment | null> => {
           setIsLoading(true);
@@ -18,6 +20,7 @@ export default function useCreateAppointment(): UseCreateAppointmentResult {
                return newPatient;
           } catch (error) {
                console.error('Error creating appointment:', error);
+               setError('Failed to create appointment. Please try again.');
                throw error;
           } finally {
                setIsLoading(false);
@@ -27,5 +30,6 @@ export default function useCreateAppointment(): UseCreateAppointmentResult {
      return {
           mutate,
           isLoading,
+          error,
      };
 }

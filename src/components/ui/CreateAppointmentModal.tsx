@@ -57,7 +57,7 @@ export default function CreateAppointmentModal({ isOpen, onClose }: { isOpen: bo
                     setTimePart('');
                     return 'Cita creada con éxito';
                },
-               error: (error) => error.message,
+               error: (error) => error.message || 'Error al crear la cita',
           });
      };
 

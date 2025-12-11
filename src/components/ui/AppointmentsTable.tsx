@@ -6,8 +6,9 @@ import { PaginatedResponse } from '@/types/responseTypes';
 import { Eye, Pencil, Trash2, User } from 'lucide-react';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import Pagination from './Pagination';
+import StatusTag from './StatusTag';
 import AppointmentDetailsModal from '../layout/AppointmentDetailsModal';
+import Pagination from './Pagination';
 
 type UIAppointment = {
      id: number;
@@ -67,21 +68,6 @@ export default function AppointmentsTable() {
           fetchAppointments(page);
      }, [page, fetchAppointments]);
 
-     const getStatusColor = (status: UIAppointment['status']) => {
-          switch (status) {
-               case 'Confirmed':
-                    return 'bg-emerald-400/10 text-emerald-400';
-               case 'Completed':
-                    return 'bg-blue-400/10 text-blue-400';
-               case 'Canceled':
-                    return 'bg-red-400/10 text-red-400';
-               case 'Pending':
-                    return 'bg-amber-400/10 text-amber-400';
-               default:
-                    return 'bg-gray-400/10 text-gray-400';
-          }
-     };
-
      // if (isLoading) {
      //      return <div className="text-white p-4">Loading appointments...</div>;
      // }
@@ -138,13 +124,10 @@ export default function AppointmentsTable() {
                                         <td className="px-6 py-4">{appointment.time}</td>
 
                                         <td className="px-6 py-4">
-                                             <span
-                                                  className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ${getStatusColor(
-                                                       appointment.status
-                                                  )}`}
-                                             >
-                                                  {appointment.status}
-                                             </span>
+                                             <StatusTag
+                                                  status={appointment.status}
+                                                  className="!px-2.5 !py-1 !text-xs"
+                                             />
                                         </td>
 
                                         <td className="h-12 px-2 py-2">

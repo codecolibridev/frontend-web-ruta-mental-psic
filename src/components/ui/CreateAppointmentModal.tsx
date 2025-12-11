@@ -42,8 +42,9 @@ export default function CreateAppointmentModal({ isOpen, onClose }: { isOpen: bo
                const combinedDateTime = new Date(`${datePart}T${timePart}`).toISOString();
                setValue('appointment_date', combinedDateTime, { shouldValidate: true, shouldDirty: true });
           } else {
-               // Ensure validation triggers if one part is missing
-               setValue('appointment_date', '', { shouldValidate: true, shouldDirty: true });
+               // Only validate if user has interacted with date/time fields.
+               // We can infer this if either field has a value.
+               setValue('appointment_date', '', { shouldValidate: !!(datePart || timePart), shouldDirty: true });
           }
      }, [datePart, timePart, setValue]);
 

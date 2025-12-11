@@ -1,5 +1,6 @@
 'use client';
 
+import StatusTag from '../ui/StatusTag';
 import { Appointment } from '@/types/appointmentTypes';
 import { Calendar, Clock, User, X } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
@@ -70,24 +71,7 @@ const AppointmentDetailsModal: React.FC<AppointmentDetailsModalProps> = ({ isOpe
           });
      };
 
-     const getStatusColor = (status: string) => {
-          switch (status.toLowerCase()) {
-               case 'confirmed':
-               case 'confirmada':
-                    return 'bg-emerald-400/10 text-emerald-400 border-emerald-400/20';
-               case 'completed':
-               case 'completada':
-                    return 'bg-blue-400/10 text-blue-400 border-blue-400/20';
-               case 'canceled':
-               case 'cancelada':
-                    return 'bg-red-400/10 text-red-400 border-red-400/20';
-               case 'pending':
-               case 'pendiente':
-                    return 'bg-amber-400/10 text-amber-400 border-amber-400/20';
-               default:
-                    return 'bg-gray-400/10 text-gray-400 border-gray-400/20';
-          }
-     };
+
 
      return (
           <div
@@ -127,15 +111,7 @@ const AppointmentDetailsModal: React.FC<AppointmentDetailsModalProps> = ({ isOpe
                                         </p>
                                    </div>
                               </div>
-                              <span
-                                   className={`inline-flex items-center rounded-full px-3 py-1.5 text-sm font-medium border ${
-                                        appointment
-                                             ? getStatusColor(appointment.status.name)
-                                             : 'bg-gray-400/10 text-gray-400'
-                                   }`}
-                              >
-                                   {appointment?.status.name ?? 'Sin estado'}
-                              </span>
+                              <StatusTag status={appointment?.status.name ?? 'Sin estado'} />
                          </div>
 
                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-[#1A202C] rounded-lg border border-[#4A5568]/50">

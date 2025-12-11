@@ -82,9 +82,9 @@ export default function AppointmentsTable() {
           }
      };
 
-     if (isLoading) {
-          return <div className="text-white p-4">Loading appointments...</div>;
-     }
+     // if (isLoading) {
+     //      return <div className="text-white p-4">Loading appointments...</div>;
+     // }
 
      if (error) {
           return <div className="text-red-800 p-4 bg-red-400">Error loading appointments: {error}</div>;

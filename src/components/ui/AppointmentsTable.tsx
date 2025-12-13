@@ -3,14 +3,13 @@
 import { getAppointments } from '@/services/appointmentService';
 import { Appointment } from '@/types/appointmentTypes';
 import { PaginatedResponse } from '@/types/responseTypes';
-import { Eye, Pencil, Trash2, User } from 'lucide-react';
-import Image from 'next/image';
+import { Eye, Pencil, Trash2 } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import AppointmentDetailsModal from '../layout/AppointmentDetailsModal';
+import DeleteAppointmentComponent from './DeleteAppointmentComponent';
 import Pagination from './Pagination';
 import StatusTag from './StatusTag';
 import UpdateAppointmentModal from './UpdateAppointmentModal';
-import DeleteAppointmentComponent from './DeleteAppointmentComponent';
 
 type UIAppointment = {
      id: number;
@@ -19,6 +18,7 @@ type UIAppointment = {
      date: string;
      time: string;
      status: string;
+     notes: string;
 };
 
 const mapAppointmentToUI = (appointment: Appointment): UIAppointment => {
@@ -32,6 +32,7 @@ const mapAppointmentToUI = (appointment: Appointment): UIAppointment => {
           date: dateStr,
           time: timeStr,
           status: appointment.status.name,
+          notes: appointment.notes ?? '',
      };
 };
 
@@ -89,6 +90,7 @@ export default function AppointmentsTable() {
                                    <th className="px-6 py-4 font-medium">Patient Name</th>
                                    <th className="px-6 py-4 font-medium">Date</th>
                                    <th className="px-6 py-4 font-medium">Time</th>
+                                   <th className="px-6 py-4 font-medium">Notes</th>
                                    <th className="px-6 py-4 font-medium">Status</th>
                                    <th className="px-6 py-4 font-medium text-center">Actions</th>
                               </tr>
@@ -105,7 +107,7 @@ export default function AppointmentsTable() {
                                    >
                                         <td className="px-6 py-4 font-medium text-white whitespace-nowrap">
                                              <div className="flex items-center gap-3">
-                                                  {appointment.avatar ? (
+                                                  {/* {appointment.avatar ? (
                                                        <Image
                                                             src={appointment.avatar}
                                                             alt={appointment.name}
@@ -118,14 +120,17 @@ export default function AppointmentsTable() {
                                                        <div className="flex size-8 items-center justify-center rounded-full bg-gray-600">
                                                             <User className="w-5 h-5 text-gray-300" />
                                                        </div>
-                                                  )}
+                                                  )} */}
                                                   {appointment.name}
                                              </div>
                                         </td>
 
-                                        <td className="px-6 py-4">{appointment.date}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap">{appointment.date}</td>
 
-                                        <td className="px-6 py-4">{appointment.time}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap">{appointment.time}</td>
+                                        <td className="px-6 py-4">
+                                             <p className="line-clamp-1">{appointment.notes}</p>
+                                        </td>
 
                                         <td className="px-6 py-4">
                                              <StatusTag

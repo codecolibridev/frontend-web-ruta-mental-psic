@@ -10,6 +10,7 @@ import AppointmentDetailsModal from '../layout/AppointmentDetailsModal';
 import Pagination from './Pagination';
 import StatusTag from './StatusTag';
 import UpdateAppointmentModal from './UpdateAppointmentModal';
+import DeleteAppointmentComponent from './DeleteAppointmentComponent';
 
 type UIAppointment = {
      id: number;
@@ -44,6 +45,7 @@ export default function AppointmentsTable() {
      const [showModal, setShowModal] = useState(false);
      const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
      const [editingAppointment, setEditingAppointment] = useState<Appointment | null>(null);
+     const [deletingAppointment, setDeletingAppointment] = useState<Appointment | null>(null);
 
      const limit = 10;
 
@@ -160,7 +162,10 @@ export default function AppointmentsTable() {
                                                   <button
                                                        className="text-[#92adc9] hover:text-red-400 transition-all duration-200 p-1.5 rounded hover:bg-red-200/20 hover:scale-110 cursor-pointer"
                                                        title="Eliminar paciente"
-                                                       onClick={(e) => e.stopPropagation()}
+                                                       onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setDeletingAppointment(fullAppointments[index]);
+                                                       }}
                                                   >
                                                        <Trash2 className="w-4 h-4" />
                                                   </button>
@@ -182,6 +187,13 @@ export default function AppointmentsTable() {
                     appointment={editingAppointment}
                     isOpen={editingAppointment !== null}
                     onClose={() => setEditingAppointment(null)}
+                    onSuccess={() => fetchAppointments(page)}
+               />
+
+               <DeleteAppointmentComponent
+                    isOpen={deletingAppointment !== null}
+                    appointment={deletingAppointment}
+                    onClose={() => setDeletingAppointment(null)}
                     onSuccess={() => fetchAppointments(page)}
                />
 

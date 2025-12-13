@@ -10,6 +10,7 @@ export { default as CreatePatientComponent } from './ui/CreatePatientComponent';
 export { default as UpdatePatientComponent } from './ui/UpdatePatientComponent';
 export { default as UpdateAppointmentModal } from './ui/UpdateAppointmentModal';
 export { default as DeletePatientComponent } from './ui/DeletePatientComponent';
+export { default as DeleteAppointmentComponent } from './ui/DeleteAppointmentComponent';
 
 export { SelectSearchable } from './ui/SelectSearchable';
 export { SelectSearchableField } from './ui/SelectSearchableField';

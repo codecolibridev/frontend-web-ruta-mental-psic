@@ -68,3 +68,13 @@ export async function updateAppointment(
           throw new Error(friendlyMessage);
      }
 }
+
+export async function deleteAppointment(appointmentId: number): Promise<Appointment> {
+     try {
+          const response = await apiClient.delete<Appointment>(`/appointment/${appointmentId}`);
+          return response.data;
+     } catch (error: unknown) {
+          const friendlyMessage = translateBackendError(error);
+          throw new Error(friendlyMessage);
+     }
+}

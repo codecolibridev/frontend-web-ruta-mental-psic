@@ -55,3 +55,16 @@ export async function getUpcomingAppointments(): Promise<UpcomingAppointment[]> 
           throw new Error(friendlyMessage);
      }
 }
+
+export async function updateAppointment(
+     appointmentId: number,
+     appointmentData: Partial<Appointment>
+): Promise<Appointment> {
+     try {
+          const response = await apiClient.patch<Appointment>(`/appointment/${appointmentId}`, appointmentData);
+          return response.data;
+     } catch (error: unknown) {
+          const friendlyMessage = translateBackendError(error);
+          throw new Error(friendlyMessage);
+     }
+}

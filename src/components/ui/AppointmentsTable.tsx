@@ -6,9 +6,10 @@ import { PaginatedResponse } from '@/types/responseTypes';
 import { Eye, Pencil, Trash2, User } from 'lucide-react';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
-import StatusTag from './StatusTag';
 import AppointmentDetailsModal from '../layout/AppointmentDetailsModal';
 import Pagination from './Pagination';
+import StatusTag from './StatusTag';
+import UpdateAppointmentModal from './UpdateAppointmentModal';
 
 type UIAppointment = {
      id: number;
@@ -42,6 +43,7 @@ export default function AppointmentsTable() {
      const [error, setError] = useState<string | null>(null);
      const [showModal, setShowModal] = useState(false);
      const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
+     const [editingAppointment, setEditingAppointment] = useState<Appointment | null>(null);
 
      const limit = 10;
 
@@ -126,7 +128,7 @@ export default function AppointmentsTable() {
                                         <td className="px-6 py-4">
                                              <StatusTag
                                                   status={appointment.status}
-                                                  className="!px-2.5 !py-1 !text-xs"
+                                                  className="px-2.5! py-1! text-xs!"
                                              />
                                         </td>
 
@@ -147,7 +149,10 @@ export default function AppointmentsTable() {
                                                   <button
                                                        className="text-[#92adc9] hover:text-blue-300 transition-all duration-200 p-1.5 rounded hover:bg-primary/20 hover:scale-110 cursor-pointer"
                                                        title="Editar paciente"
-                                                       onClick={(e) => e.stopPropagation()}
+                                                       onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            setEditingAppointment(fullAppointments[index]);
+                                                       }}
                                                   >
                                                        <Pencil className="w-4 h-4" />
                                                   </button>
@@ -171,6 +176,13 @@ export default function AppointmentsTable() {
                     isOpen={showModal}
                     appointment={selectedAppointment}
                     onClose={() => setShowModal(false)}
+               />
+
+               <UpdateAppointmentModal
+                    appointment={editingAppointment}
+                    isOpen={editingAppointment !== null}
+                    onClose={() => setEditingAppointment(null)}
+                    onSuccess={() => fetchAppointments(page)}
                />
 
                <Pagination meta={meta} page={page} setPage={setPage} limit={limit} />

@@ -8,6 +8,7 @@ export { default as WeeklyActivityChart } from './layout/WeeklyMonthActivityChar
 export { default as PatientsTable } from './ui/PatientsTable';
 export { default as CreatePatientComponent } from './ui/CreatePatientComponent';
 export { default as UpdatePatientComponent } from './ui/UpdatePatientComponent';
+export { default as UpdateAppointmentModal } from './ui/UpdateAppointmentModal';
 export { default as DeletePatientComponent } from './ui/DeletePatientComponent';
 
 export { SelectSearchable } from './ui/SelectSearchable';

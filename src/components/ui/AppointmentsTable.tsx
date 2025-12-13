@@ -87,12 +87,12 @@ export default function AppointmentsTable() {
                     <table className="w-full text-left text-sm text-gray-300">
                          <thead className="bg-[#192633] text-xs uppercase text-white">
                               <tr>
-                                   <th className="px-6 py-4 font-medium">Patient Name</th>
-                                   <th className="px-6 py-4 font-medium">Date</th>
-                                   <th className="px-6 py-4 font-medium">Time</th>
-                                   <th className="px-6 py-4 font-medium">Notes</th>
-                                   <th className="px-6 py-4 font-medium">Status</th>
-                                   <th className="px-6 py-4 font-medium text-center">Actions</th>
+                                   <th className="px-6 py-4 font-medium">Paciente</th>
+                                   <th className="px-6 py-4 font-medium">Fecha</th>
+                                   <th className="px-6 py-4 font-medium">Hora</th>
+                                   <th className="px-6 py-4 font-medium">Notas</th>
+                                   <th className="px-6 py-4 font-medium">Estado</th>
+                                   <th className="px-6 py-4 font-medium text-center">Acciones</th>
                               </tr>
                          </thead>
                          <tbody>

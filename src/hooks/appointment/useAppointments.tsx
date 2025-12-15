@@ -4,7 +4,7 @@ import { PaginatedResponse, UseParamsOptions } from '@/types/responseTypes';
 import { useEffect, useState } from 'react';
 
 export default function useAppointments(options: UseParamsOptions) {
-     const [data, setData] = useState<Appointment[] | null>(null);
+     const [data, setData] = useState<Appointment[]>([]);
      const [loading, setLoading] = useState(false);
      const [error, setError] = useState<string | null>(null);
      const [meta, setMeta] = useState<PaginatedResponse<Appointment>['meta'] | null>(null);

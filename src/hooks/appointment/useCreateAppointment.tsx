@@ -16,8 +16,8 @@ export default function useCreateAppointment(): UseCreateAppointmentResult {
      const mutate = async (appointmentData: CreateAppointmentInterface): Promise<Appointment | null> => {
           setIsLoading(true);
           try {
-               const newPatient = await createAppointment(appointmentData);
-               return newPatient;
+               const newAppointment = await createAppointment(appointmentData);
+               return newAppointment;
           } catch (error) {
                console.error('Error creating appointment:', error);
                setError('Failed to create appointment. Please try again.');

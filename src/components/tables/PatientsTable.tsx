@@ -1,11 +1,11 @@
 'use client';
 
 import { Pencil, Eye, Trash2 } from 'lucide-react';
-import Pagination from './Pagination';
-import PatientsFilters from './PatientsFilters';
+import Pagination from '../ui/Pagination';
+import PatientsFilters from '../ui/PatientsFilters';
 import usePatients from '@/hooks/patients/usePatients';
 import { useState } from 'react';
-import PatientDetailsModal from '../layout/PatientDetailsModal';
+import PatientDetailsModal from '../modals/PatientDetailsModal';
 import { Patient } from '@/types/patients';
 import { UpdatePatientComponent, DeletePatientComponent } from '@/components/index';
 

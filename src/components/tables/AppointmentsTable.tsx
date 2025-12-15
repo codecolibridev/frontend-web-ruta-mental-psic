@@ -7,8 +7,8 @@ import { Eye, Pencil, Trash2 } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import AppointmentDetailsModal from '../modals/AppointmentDetailsModal';
 import DeleteAppointmentComponent from '../modals/DeleteAppointmentComponent';
-import Pagination from './Pagination';
-import StatusTag from './StatusTag';
+import Pagination from '../ui/Pagination';
+import StatusTag from '../ui/StatusTag';
 import UpdateAppointmentModal from '../modals/UpdateAppointmentModal';
 
 type UIAppointment = {

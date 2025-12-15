@@ -2,7 +2,7 @@
 
 import { Button } from '@/components';
 import PageHeader from '@/components/layout/PageHeader';
-import AppointmentsTable from '@/components/ui/AppointmentsTable';
+import AppointmentsTable from '@/components/tables/AppointmentsTable';
 import CreateAppointmentModal from '@/components/modals/CreateAppointmentModal';
 import { Plus } from 'lucide-react';
 import { useState } from 'react';

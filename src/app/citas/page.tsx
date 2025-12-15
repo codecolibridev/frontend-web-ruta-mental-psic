@@ -22,7 +22,7 @@ export default function Page() {
                          leftIcon={<Plus className="h-4 w-4" />}
                          onClick={() => setIsModalOpen(true)}
                     >
-                         Nuevo Cita
+                         Crear Cita
                     </Button>
                </div>
                <AppointmentsTable />

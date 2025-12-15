@@ -155,7 +155,7 @@ export default function AppointmentsTable() {
 
                                                   <button
                                                        className="text-[#92adc9] hover:text-blue-300 transition-all duration-200 p-1.5 rounded hover:bg-primary/20 hover:scale-110 cursor-pointer"
-                                                       title="Editar paciente"
+                                                       title="Editar cita"
                                                        onClick={(e) => {
                                                             e.stopPropagation();
                                                             setEditingAppointment(fullAppointments[index]);
@@ -166,7 +166,7 @@ export default function AppointmentsTable() {
 
                                                   <button
                                                        className="text-[#92adc9] hover:text-red-400 transition-all duration-200 p-1.5 rounded hover:bg-red-200/20 hover:scale-110 cursor-pointer"
-                                                       title="Eliminar paciente"
+                                                       title="Eliminar cita"
                                                        onClick={(e) => {
                                                             e.stopPropagation();
                                                             setDeletingAppointment(fullAppointments[index]);

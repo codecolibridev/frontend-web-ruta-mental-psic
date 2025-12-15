@@ -15,7 +15,7 @@ export { default as DeleteAppointmentComponent } from './modals/DeleteAppointmen
 export { SelectSearchable } from './ui/SelectSearchable';
 export { SelectSearchableField } from './ui/SelectSearchableField';
 
-export { default as Navbar } from './ui/Navbar';
+export { default as Navbar } from './layout/Navbar';
 
 export { default as ConditionalNavbar } from './layout/ConditionalNavbar';
 export { default as Notification } from './layout/Notification';

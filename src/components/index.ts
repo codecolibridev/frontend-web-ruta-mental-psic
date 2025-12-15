@@ -6,11 +6,11 @@ export type { InputProps } from './ui/Input';
 export { default as UpcomingAppointments } from './ui/UpcomingAppointments';
 export { default as WeeklyActivityChart } from './layout/WeeklyMonthActivityChart';
 export { default as PatientsTable } from './ui/PatientsTable';
-export { default as CreatePatientComponent } from './ui/CreatePatientComponent';
-export { default as UpdatePatientComponent } from './ui/UpdatePatientComponent';
-export { default as UpdateAppointmentModal } from './ui/UpdateAppointmentModal';
-export { default as DeletePatientComponent } from './ui/DeletePatientComponent';
-export { default as DeleteAppointmentComponent } from './ui/DeleteAppointmentComponent';
+export { default as CreatePatientComponent } from './modals/CreatePatientComponent';
+export { default as UpdatePatientComponent } from './modals/UpdatePatientComponent';
+export { default as UpdateAppointmentModal } from './modals/UpdateAppointmentModal';
+export { default as DeletePatientComponent } from './modals/DeletePatientComponent';
+export { default as DeleteAppointmentComponent } from './modals/DeleteAppointmentComponent';
 
 export { SelectSearchable } from './ui/SelectSearchable';
 export { SelectSearchableField } from './ui/SelectSearchableField';

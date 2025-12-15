@@ -6,13 +6,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import Input from './Input';
-import PatientSelect from './PatientSelect';
-import PsychologistSelect from './PsychologistSelect';
-import { SelectStatusAppointment } from './SelectStatusAppointment';
-import TextArea from './TextArea';
-import Modal from '../layout/Modal';
-import Button from './Button';
+import Input from '../ui/Input';
+import PatientSelect from '../ui/PatientSelect';
+import PsychologistSelect from '../ui/PsychologistSelect';
+import { SelectStatusAppointment } from '../ui/SelectStatusAppointment';
+import TextArea from '../ui/TextArea';
+import Modal from './Modal';
+import Button from '../ui/Button';
 
 export default function CreateAppointmentModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
      const { mutate } = useCreateAppointment();

@@ -1,29 +1,28 @@
 'use client';
 
+import useDeleteAppointment from '@/hooks/appointment/useDeleteAppointment';
+import { Appointment } from '@/types/appointmentTypes';
 import { AlertTriangle } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import Button from './Button';
 import { toast } from 'sonner';
-import useDeletePatient from '@/hooks/patients/useDeletePatient';
-import { Patient } from '@/types/patients';
-import Modal from '../layout/Modal';
+import Button from '../ui/Button';
+import Modal from './Modal';
 
-export default function DeletePatientComponent({
+export default function DeleteAppointmentComponent({
      isOpen,
      onClose,
-     patient,
+     appointment,
      onSuccess,
 }: {
      isOpen: boolean;
      onClose: () => void;
-     patient: Patient | null;
+     appointment: Appointment | null;
      onSuccess?: () => void;
 }) {
-     const { mutate, isLoading } = useDeletePatient();
+     const { mutate, isLoading } = useDeleteAppointment();
      const [countdown, setCountdown] = useState(7);
      const canDelete = isOpen && countdown <= 0;
 
-     // Reset countdown when modal opens (defer state updates to avoid synchronous setState inside effect)
      useEffect(() => {
           let timer: ReturnType<typeof setTimeout> | undefined;
           if (isOpen) {
@@ -37,7 +36,6 @@ export default function DeletePatientComponent({
           };
      }, [isOpen]);
 
-     // Countdown timer
      useEffect(() => {
           if (!isOpen || countdown <= 0) {
                return;
@@ -49,23 +47,22 @@ export default function DeletePatientComponent({
 
           return () => clearTimeout(timer);
      }, [countdown, isOpen]);
+
      const handleDelete = async () => {
-          if (!patient || !canDelete) return;
+          if (!appointment || !canDelete) return;
 
-          const patientFullName = `${patient.first_name} ${patient.last_name}`;
-
-          toast.promise(mutate(patient.id), {
-               loading: 'Eliminando paciente...',
+          toast.promise(mutate(appointment.id), {
+               loading: 'Eliminando cita...',
                success: () => {
                     onClose();
                     onSuccess?.();
-                    return `El paciente ${patientFullName} fue eliminado exitosamente`;
+                    return `La cita fue eliminada exitosamente`;
                },
                error: (error) => error.message,
           });
      };
 
-     if (!patient) return null;
+     if (!appointment) return null;
 
      return (
           <Modal isOpen={isOpen} onClose={onClose} title="" maxWidth="md" showCloseButton={false}>
@@ -75,25 +72,23 @@ export default function DeletePatientComponent({
                          <div className="p-2 bg-red-500/10 rounded-lg">
                               <AlertTriangle className="w-6 h-6 text-destructive" />
                          </div>
-                         <h3 className="text-text-primary-dark text-xl font-bold">Eliminar Paciente</h3>
+                         <h3 className="text-text-primary-dark text-xl font-bold">Eliminar Cita</h3>
                     </div>
                     <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
                          <p className="text-text-primary-dark text-center">
-                              ¿Estás seguro de que deseas eliminar al paciente?
+                              ¿Estás seguro de que deseas eliminar la cita?
                          </p>
                          <div className="mt-4 space-y-2">
                               <p className="text-text-primary-dark font-semibold text-center text-lg">
-                                   {patient.first_name} {patient.last_name}
+                                   Paciente: {appointment.patient.first_name} {appointment.patient.last_name}
                               </p>
                               <p className="text-text-secondary-dark text-center text-sm">
-                                   Cédula: {patient.id_number}
+                                   Fecha: {new Date(appointment.appointment_date).toLocaleString()}
                               </p>
                          </div>
                     </div>
 
-                    <p className="text-text-secondary-dark text-sm text-center">
-                         Esta acción no se puede deshacer. Se eliminarán todos los datos asociados a este paciente.
-                    </p>
+                    <p className="text-text-secondary-dark text-sm text-center">Esta acción no se puede deshacer.</p>
 
                     {!canDelete && (
                          <div className="bg-yellow-500/5 border border-yellow-500/20 rounded-lg p-3">
@@ -116,7 +111,7 @@ export default function DeletePatientComponent({
                               loading={isLoading}
                               className="bg-red-500 hover:bg-red-600 disabled:bg-red-500/50"
                          >
-                              {!canDelete ? `Esperar (${countdown}s)` : 'Eliminar Paciente'}
+                              {!canDelete ? `Esperar (${countdown}s)` : 'Eliminar Cita'}
                          </Button>
                     </div>
                </div>

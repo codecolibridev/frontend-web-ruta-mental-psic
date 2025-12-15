@@ -7,13 +7,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import Button from './Button';
-import Input from './Input';
-import Modal from '../layout/Modal';
-import PatientSelect from './PatientSelect';
-import PsychologistSelect from './PsychologistSelect';
-import { SelectStatusAppointment } from './SelectStatusAppointment';
-import TextArea from './TextArea';
+import Button from '../ui/Button';
+import Input from '../ui/Input';
+import Modal from './Modal';
+import PatientSelect from '../ui/PatientSelect';
+import PsychologistSelect from '../ui/PsychologistSelect';
+import { SelectStatusAppointment } from '../ui/SelectStatusAppointment';
+import TextArea from '../ui/TextArea';
 
 export default function UpdateAppointmentModal({
      isOpen,

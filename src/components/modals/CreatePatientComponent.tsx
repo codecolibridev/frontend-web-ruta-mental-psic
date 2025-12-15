@@ -5,11 +5,11 @@ import TextArea from '@/components/ui/TextArea';
 import { CreatePatientInterface, createPatientSchema } from '@/schema/patientSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller } from 'react-hook-form';
-import Button from './Button';
+import Button from '../ui/Button';
 import useCreatePatient from '@/hooks/patients/useCreatePatient';
-import PsychologistSelect from './PsychologistSelect';
+import PsychologistSelect from '../ui/PsychologistSelect';
 import { toast } from 'sonner';
-import Modal from '../layout/Modal';
+import Modal from './Modal';
 
 export default function CreatePatientComponent({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
      const { mutate, isLoading } = useCreatePatient();

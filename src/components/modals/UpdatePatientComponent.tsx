@@ -6,13 +6,13 @@ import { CreatePatientInterface, createPatientSchema } from '@/schema/patientSch
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import Button from './Button';
-import PsychologistSelect from './PsychologistSelect';
+import Button from '../ui/Button';
+import PsychologistSelect from '../ui/PsychologistSelect';
 import { toast } from 'sonner';
 import useUpdatePatient from '@/hooks/patients/useUpdatePatient';
 import { Patient } from '@/types/patients';
 import { formatDateForInput } from '@/utils/date-utils';
-import Modal from '../layout/Modal';
+import Modal from './Modal';
 
 export default function UpdatePatientComponent({
      isOpen,

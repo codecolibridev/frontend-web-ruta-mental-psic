@@ -4,7 +4,7 @@ import { Patient } from '@/types/patients';
 import { formatDateAndAge } from '@/utils/date-utils';
 import { User } from 'lucide-react';
 import React from 'react';
-import Modal from '@/components/layout/Modal';
+import Modal from '@/components/modals/Modal';
 
 interface PatientDetailsModalProps {
      isOpen: boolean;

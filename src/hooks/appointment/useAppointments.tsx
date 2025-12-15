@@ -32,5 +32,5 @@ export default function useAppointments(options: UseParamsOptions) {
           // eslint-disable-next-line react-hooks/exhaustive-deps
      }, [limit, page]);
 
-     return { data, isLoading: loading, error, meta };
+     return { data, isLoading: loading, error, meta, refetch: fetchAppointments };
 }

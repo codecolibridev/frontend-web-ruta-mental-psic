@@ -76,7 +76,7 @@ export default function UpdateAppointmentModal({
      // Combine date and time and update the form value
      useEffect(() => {
           if (datePart && timePart) {
-               const combinedDateTime = new Date(`${datePart}T${timePart}Z`).toISOString();
+               const combinedDateTime = new Date(`${datePart}T${timePart}`).toISOString();
                setValue('appointment_date', combinedDateTime, { shouldValidate: true, shouldDirty: true });
           } else {
                // Only validate if user has interacted with date/time fields.

@@ -14,7 +14,7 @@ export default function useStatusHook() {
                setData(resp);
           } catch (error) {
                console.error('Error fetching status:', error);
-               setError((error as Error)?.message ?? 'Error cargando pacientes');
+               setError((error as Error)?.message ?? 'Error cargando estados');
           } finally {
                setLoading(false);
           }

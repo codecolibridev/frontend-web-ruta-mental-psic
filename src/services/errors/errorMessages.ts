@@ -9,6 +9,10 @@ export const VALIDATION_ERRORS: Record<string, string> = {
      'birth_date should not be empty': 'La fecha de nacimiento es obligatoria',
      'notes should not be empty': 'Las notas son obligatorias',
      'diagnosis should not be empty': 'El diagnóstico es obligatorio',
+     'status_id should not be empty': 'El estado es obligatorio',
+     'appointment_date should not be empty': 'La fecha y hora de la cita son obligatorias',
+     'patient_id should not be empty': 'El paciente es obligatorio',
+     'psychologist_id should not be empty': 'El psicólogo es obligatorio',
 
      // incorrect types
      'first_name must be a string': 'El nombre debe ser texto',
@@ -17,6 +21,7 @@ export const VALIDATION_ERRORS: Record<string, string> = {
      'id_number must be a string': 'La cédula debe ser texto',
      'notes must be a string': 'Las notas deben ser texto',
      'diagnosis must be a string': 'El diagnóstico debe ser texto',
+     'status_id must be a number conforming to the specified constraints': 'Estado incorrecto',
 
      // format validations
      'birth_date must be a valid ISO 8601 date string': 'La fecha de nacimiento no es válida',

@@ -1,9 +1,26 @@
 // Utility function to format a date string for HTML input type="date" (YYYY-MM-DD)
-export const formatDateForInput = (dateString?: string | null) => {
-     if (!dateString) return '';
-     const match = dateString.match(/^(\d{4}-\d{2}-\d{2})/);
-     if (match) return match[1];
-     return '';
+export const formatDateForInput = (dateValue?: Date | string | null) => {
+     if (!dateValue) return '';
+
+     let date: Date;
+     if (typeof dateValue === 'string') {
+          const match = dateValue.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+          if (match) {
+               date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+          } else {
+               date = new Date(dateValue);
+          }
+     } else {
+          date = dateValue;
+     }
+
+     if (isNaN(date.getTime())) return '';
+
+     const year = date.getFullYear();
+     const month = (date.getMonth() + 1).toString().padStart(2, '0');
+     const day = date.getDate().toString().padStart(2, '0');
+
+     return `${year}-${month}-${day}`;
 };
 
 // Formats a date string and calculates age, returning a string like "27 de junio de 2025 (30 años)"

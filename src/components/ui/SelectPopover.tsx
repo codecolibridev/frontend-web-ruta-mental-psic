@@ -1,8 +1,7 @@
 'use client';
 
-import { ChevronDown } from 'lucide-react';
+import { Check, ChevronDown } from 'lucide-react';
 import { useState, type KeyboardEvent } from 'react';
-
 type Option = { value: string; label: string };
 
 interface SelectPopoverProps {
@@ -19,16 +18,20 @@ export function SelectPopover({ label, options, value, onChange, placeholder = '
 
      return (
           <div className="relative w-full max-w-xs">
-               {label && <label className="mb-2 block text-sm font-medium text-slate-300">{label}</label>}
+               {label && (
+                    <label className="pb-1 block text-sm font-medium text-slate-700 dark:text-slate-300">{label}</label>
+               )}
 
                <button
                     type="button"
                     aria-haspopup="listbox"
                     aria-expanded={isOpen}
                     onClick={() => setIsOpen(!isOpen)}
-                    className="flex h-10 w-full items-center justify-between rounded-lg border border-(--select-border) bg-(--select-bg) px-3 py-2 text-(--select-text) transition-all hover:bg-(--select-hover) focus:outline-none focus:ring-2 focus:ring-(--select-focus-ring) focus:ring-offset-2 focus:ring-offset-background-dark"
+                    className="flex h-12 w-full items-center justify-between rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-slate-900 dark:text-white transition-all hover:bg-slate-50 dark:hover:bg-slate-700/50 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary text-sm"
                >
-                    <span className={value ? '' : 'text-(--select-placeholder)'}>{selectedLabel}</span>
+                    <span className={value ? 'text-slate-900 dark:text-white' : 'text-slate-400 dark:text-slate-500'}>
+                         {selectedLabel}
+                    </span>
                     <ChevronDown
                          className="h-4 w-4 text-slate-400 transition-transform duration-200"
                          style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
@@ -36,10 +39,7 @@ export function SelectPopover({ label, options, value, onChange, placeholder = '
                </button>
 
                {isOpen && (
-                    <div
-                         className="absolute z-50 mt-2 w-full rounded-lg border border-(--select-dropdown-border) bg-(--select-dropdown-bg) shadow-lg"
-                         style={{ boxShadow: 'var(--select-dropdown-shadow)' }}
-                    >
+                    <div className="absolute z-50 mt-2 w-full rounded-lg border border-slate-700 bg-slate-800 shadow-lg">
                          <ul
                               role="listbox"
                               aria-multiselectable={false}
@@ -64,15 +64,17 @@ export function SelectPopover({ label, options, value, onChange, placeholder = '
                                                        setIsOpen(false);
                                                   }
                                              }}
-                                             className={`flex cursor-pointer select-none items-center justify-between px-3 py-2 transition-colors hover:bg-(--select-hover) ${
+                                             className={`flex cursor-pointer select-none items-center justify-between px-3 py-2 transition-colors hover:bg-slate-700/50 ${
                                                   isSelected
-                                                       ? 'bg-(--select-item-selected-bg) font-medium text-(--select-item-selected-text)'
-                                                       : 'text-(--select-text)'
+                                                       ? 'bg-primary/20 font-medium text-primary'
+                                                       : 'text-slate-200'
                                              }`}
                                         >
                                              <span>{option.label}</span>
                                              {isSelected && (
-                                                  <span className="material-symbols-outlined text-sm">check</span>
+                                                  <span className="material-symbols-outlined text-sm">
+                                                       <Check className="h-4 w-4 text-primary" />
+                                                  </span>
                                              )}
                                         </li>
                                    );

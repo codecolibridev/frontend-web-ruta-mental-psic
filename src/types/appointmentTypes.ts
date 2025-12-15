@@ -1,3 +1,26 @@
+export interface Appointment {
+     id: number;
+     patient_id: number;
+     psychologist_id: number;
+     appointment_date: string;
+     status_id: number;
+     notes: string | null;
+     created_at: string;
+     updated_at: string | null;
+     deleted_at: string | null;
+     psychologist: {
+          first_name: string;
+          last_name: string;
+     };
+     patient: {
+          first_name: string;
+          last_name: string;
+     };
+     status: {
+          name: string;
+     };
+}
+
 export interface AppointmentStats {
      today: number | null;
      week: number | null;

@@ -70,23 +70,23 @@ export default function PatientsTable() {
                     <table className="w-full min-w-[800px] table-fixed">
                          <thead>
                               <tr className="bg-[#192633]">
-                                   <th className="w-1/4 px-4 py-3 text-left text-sm font-medium text-white">
-                                        Patient Name
+                                   <th className="w-1/4 px-4 py-3 text-left text-xs font-medium text-white">
+                                        PACIENTE
                                    </th>
-                                   <th className="w-28 px-4 py-3 text-left text-sm font-medium text-white hidden sm:table-cell">
-                                        Cedula
+                                   <th className="w-28 px-4 py-3 text-left text-xs font-medium text-white hidden sm:table-cell">
+                                        CEDULA
                                    </th>
-                                   <th className="px-4 py-3 text-left text-sm font-medium text-white hidden lg:table-cell">
-                                        Therapist
+                                   <th className="px-4 py-3 text-left text-xs font-medium text-white hidden lg:table-cell">
+                                        PSICÓLOGO
                                    </th>
-                                   <th className="px-4 py-3 text-left text-sm font-medium text-white hidden md:table-cell">
-                                        Email
+                                   <th className="px-4 py-3 text-left text-xs font-medium text-white hidden md:table-cell">
+                                        CORREO ELECTRÓNICO
                                    </th>
-                                   <th className="px-4 py-3 text-left text-sm font-medium text-white hidden xl:table-cell">
-                                        Diagnosis
+                                   <th className="px-4 py-3 text-left text-xs font-medium text-white hidden xl:table-cell">
+                                        DIAGNÓSTICO
                                    </th>
-                                   <th className="w-32 px-4 py-3 text-center text-sm font-medium text-white">
-                                        Actions
+                                   <th className="w-32 px-4 py-3 text-center text-xs font-medium text-white">
+                                        ACCIONES
                                    </th>
                               </tr>
                          </thead>
@@ -94,7 +94,7 @@ export default function PatientsTable() {
                               {patients.map((patient) => (
                                    <tr
                                         key={patient.id}
-                                        className="border-t border-[#324d67] hover:bg-[#192633] transition-colors cursor-pointer"
+                                        className="border-t border-[#324d67] hover:bg-[#192633] transition-colors cursor-pointer text-sm"
                                         onClick={() => {
                                              setSelectedPatient(patient);
                                              setShowModal(true);

@@ -56,7 +56,7 @@ export default function Pagination({ meta, page, limit, setPage }: PaginationPro
      return (
           <div className="flex flex-wrap items-center justify-between gap-4">
                <p className="text-sm text-[#92adc9]">
-                    Showing {start} to {end} of {total} patients
+                    Mostrando {start} a {end} de {total} pacientes
                </p>
                <div className="flex items-center gap-2">
                     <button

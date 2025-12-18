@@ -48,7 +48,7 @@ export default function PatientsFilters({
 
                                    <input
                                         type="text"
-                                        placeholder="Search by name or patient ID..."
+                                        placeholder="Buscar por nombre o correo electrónico"
                                         className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-white focus:outline-0 border-none bg-transparent h-full placeholder:text-[#92adc9] px-4 pl-2 text-base font-normal leading-normal"
                                         value={search}
                                         onChange={(e) => {

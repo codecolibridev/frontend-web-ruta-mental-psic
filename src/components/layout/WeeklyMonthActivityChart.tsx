@@ -28,7 +28,7 @@ export default function ActivityChart() {
      }
 
      return (
-          <section className="min-h-[400px] md:min-h-auto bg-[#2D3748] flex flex-col flex-1 justify-between p-6 rounded-xl border border-[#4A5568]/50 gap-4">
+          <section className="min-h-[400px] md:min-h-auto bg-[#192633] flex flex-col flex-1 justify-between p-6 rounded-xl border border-[#4A5568]/50 gap-4">
                <div className="flex justify-between items-center mb-4">
                     <h2 className="text-[#E2E8F0] text-lg font-bold">
                          {isWeek ? 'Actividad Semanal' : 'Actividad Mensual'}

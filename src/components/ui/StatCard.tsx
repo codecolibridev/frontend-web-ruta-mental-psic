@@ -21,7 +21,7 @@ export default function StatCard({ title, value, diff, diffLabel }: StatCardProp
      };
 
      return (
-          <div className="flex flex-col gap-1 rounded-xl p-4 bg-[#2D3748] border border-[#4A5568]/50 hover:border-[#4A5568] transition-all duration-200">
+          <div className="flex flex-col gap-1 rounded-xl p-4 bg-[#192633] border border-[#4A5568]/50 hover:border-[#4A5568] transition-all duration-200">
                <p className="text-[#A0AEC0] text-xs font-medium">{title}</p>
                <p className="text-[#E2E8F0] tracking-tight text-3xl font-bold">{value}</p>
                {renderDiff(diff, diffLabel)}

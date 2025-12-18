@@ -20,7 +20,7 @@ export default function UpcomingAppointments() {
      }
 
      return (
-          <section className="bg-[#2D3748] p-6 rounded-xl border border-[#4A5568]/50">
+          <section className="bg-[#192633] p-6 rounded-xl border border-[#4A5568]/50">
                <div className="flex justify-between items-center mb-4">
                     <h2 className="text-[#E2E8F0] text-lg font-bold">Citas proximas</h2>
                     {/* <a className="text-sm font-medium text-[#63B3ED] hover:underline" href="#">

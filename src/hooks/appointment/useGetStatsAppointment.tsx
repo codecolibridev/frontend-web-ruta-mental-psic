@@ -13,6 +13,7 @@ export default function useGetStatsAppointment() {
                setError(null);
 
                const res = await getAppointmentStats();
+               console.log(res.comparision);
                setData(res);
           } catch (error) {
                console.error('Error fetching appointment stats:', error);

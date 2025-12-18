@@ -11,11 +11,12 @@ export default function CardsGroup() {
      const week = data?.week || 0;
      const month = data?.month || 0;
      const patientsThisMonth = data?.patientsThisMonth || 0;
+
      const comparison = {
-          dayDiff: data?.comparison?.todayDiff || 0,
-          weekDiff: data?.comparison?.weekDiff || 0,
-          monthDiff: data?.comparison?.monthDiff || 0,
-          patientsMonthDiff: data?.comparison?.patientsMonthDiff || 0,
+          dayDiff: data?.comparision?.dayDiff || 0,
+          weekDiff: data?.comparision?.weekDiff || 0,
+          monthDiff: data?.comparision?.monthDiff || 0,
+          patientsMonthDiff: data?.comparision?.patientsMonthDiff || 0,
      };
 
      useEffect(() => {

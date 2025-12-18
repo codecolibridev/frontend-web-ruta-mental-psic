@@ -10,6 +10,13 @@ apiClient.interceptors.request.use(
      (config) => {
           // here we can add auth token to headers
 
+          // schedule zone header
+          const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+          if (config.headers) {
+               config.headers['X-Timezone'] = timeZone;
+          }
+
           return config;
      },
      (error) => Promise.reject(error)
